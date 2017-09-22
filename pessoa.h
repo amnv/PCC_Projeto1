@@ -4,8 +4,7 @@
 class pessoa
 {
 public:
-    pessoa();
-    ~pessoa();
+
     int fala();   
 };
 

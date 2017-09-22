@@ -4,11 +4,14 @@
 
 using namespace std;
 
+/*para rodar executar 
+    g++ *.h *.cpp
+*/
+
 int main(int argc, char const *argv[])
 {
-    pessoa p* = new pessoa();
-    p::fala();
-
+   pessoa p;
+    p.fala();
 
     return 0;
 }
