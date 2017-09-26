@@ -4,8 +4,8 @@
 class WuManber
 {
 public:
-    WU_MANBER();
-    ~WU_MANBER();
+    WuManber();
+    ~WuManber();
     
 };
 
