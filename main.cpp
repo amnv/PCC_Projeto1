@@ -1,5 +1,7 @@
 #include <iostream>
 #include <getopt.h> // *GNU* Para o getopt_long()
+#include <string>
+#include <queue>
 
 //algorithm implementation
 #include "seller.h"
@@ -17,6 +19,14 @@ using namespace std;
     ./a.out
 */
 
+int charToInt(char* texto)
+{
+    int x;
+    //falta implementar
+    return x;
+}
+
+
 
 int main(int argc, char **argv)
 {
@@ -27,6 +37,13 @@ int main(int argc, char **argv)
         -c --count
     */
     int optc = 0;
+    int editDistance = 0;
+    string pattern;
+    string patternfileName;
+    string algorithm_name;
+    queue<string> files;
+    bool count = false;
+
 
     //no_argument = 0, required_argument = 1, opcional_argument = 2
     const struct option optionArray[] = {
@@ -42,23 +59,47 @@ int main(int argc, char **argv)
         switch (optc)
         {
             case 'e':
-                cout << "edit" << endl;
+                editDistance = charToInt(optarg);
+                //editDistance = optarg;
                 break;
             case 'p':
+                patternfileName = optarg;
                 cout << "pattern" << endl;
                 break;
             case 'a':
+                algorithm_name = optarg;
                 cout << "algorithm" << endl;
                 break;
             case 'c':
+                count = true;
                 cout << "count" << endl;
                 break;
             default:
                 cout << "codigo digitado errado" << endl;
+                return 1;
         }
    }
 
-   while(optind < argc) cout << argv[optind++] << endl;
+
+   //optind pega argumentos restantes
+   //variavel de getopt
+   if (optind >= argc)
+   {
+        cout << "Erro! Falta dados" << endl;
+        return 1;
+   }
+
+   pattern = argv[optind++];
+
+   while(optind < argc) files.push(argv[optind++]);
+
+   if (files.empty()) cout << "Erro! Falta dados" << endl;
+
+   while(!files.empty())
+   {
+        cout << files.front() << endl;
+        files.pop();
+   } 
 
    return 0;
 }
