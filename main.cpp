@@ -58,5 +58,7 @@ int main(int argc, char **argv)
         }
    }
 
+   while(optind < argc) cout << argv[optind++] << endl;
+
    return 0;
 }
