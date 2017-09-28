@@ -2,6 +2,50 @@
 
 using namespace std;
 
+class bitarray {
+private:
+    int n;
+    deque<bool> data;
+public:
+    bitarray(int n){
+        this->n = n;
+        deque<bool> deck;
+        this->data = deck;
+        
+    }
+    bitarray(deque<bool> n){
+        this->n = n.size();
+        this->data = n;
+    }
+
+    deque<bool> getData(){
+        return this->data;
+    }
+
+    bitarray* operator&(bitarray* c){
+        deque<bool> a = this->getData(), b = c->getData();
+
+        deque<bool> r;
+        int m = max(a.size(), b.size());
+        for (int i=0; i<m; i++){
+            bool el;
+            if (a.size() >= i+1 && b.size() >= i+1){
+                el = a[i] & b[i];
+            } else if (a.size() >= i+1){
+                el = a[i];
+            } else{
+                el = b[i];
+            }
+            r.push_back(el);
+        }
+        return new bitarray(r);
+    }
+
+    void print(){
+        cout << "opa" << n << endl;
+    }
+};
+
 // map<string, string> char_mask(string pat, string* ab){
 //     map <string, string> masks = NULL;
 //     int m = pat.size();
@@ -16,6 +60,10 @@ using namespace std;
 
 int main()
 {
+    bitarray* opa = new bitarray(2);
+    opa->print();
+    deque<int> deck;
+    cout << "\n" << deck[0] << "\n";
     string a = "opa";
     map<string, string> dict;
     dict.insert(pair<string, string>("a", "asdas"));
