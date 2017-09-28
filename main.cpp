@@ -44,6 +44,10 @@ int main(int argc, char **argv)
     queue<string> files;
     bool count = false;
 
+    ahoCorasick a;
+    a.debug();
+
+    return 0;
 
     //no_argument = 0, required_argument = 1, opcional_argument = 2
     const struct option optionArray[] = {

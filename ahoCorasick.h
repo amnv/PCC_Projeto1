@@ -1,12 +1,25 @@
+#include <vector>
+#include <utility>
+#include <string>
+
 #ifndef AHO_CORASICK
 #define AHO_CORASICK
 
-class AhoCorasick
+using namespace std;
+
+class ahoCorasick
 {
-public:
-    AhoCorasick();
-    ~AhoCorasick();
-    
+    private:
+        vector<vector<pair<char, int> > > gotoState;
+
+    public:
+
+        ahoCorasick();
+        ~ahoCorasick();
+        
+        int g(char c, int state);
+        void buildGotoState(vector<string> pattern);
+        void debug();
 };
 
 #endif
