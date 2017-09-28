@@ -1,6 +1,7 @@
 #include "ahoCorasick.h"
 #include <iostream>
 #include <utility>
+#include <map>
 
 using namespace std;
 
@@ -52,16 +53,19 @@ void ahoCorasick::buildGotoState(vector<string> pattern)
             vector<pair<char, int> > v; 
             v.push_back(make_pair(pat[i], newState));
             gotoState.push_back(v);
-
         }
+
+	output[newState].push_back(pat);
     }
 }
 
 void ahoCorasick::debug()
 {
     vector<string> a;
-    a.push_back("abc");
-    a.push_back("abd");
+    a.push_back("he");
+    a.push_back("she");
+    a.push_back("his");
+    a.push_back("hers");
 
     buildGotoState(a);
 
@@ -72,6 +76,17 @@ void ahoCorasick::debug()
             cout << "pos " << i << " val " << gotoState[i][j].first 
             << " goto " << gotoState[i][j].second << endl;
         }
-
+	
     }
+
+    for (map<int, vector<string> >::iterator it = output.begin(); it != output.end(); ++it)
+    {
+	cout << "estado " << it->first << " palavras " << endl;
+        for (int j = 0; j < it->second.size(); ++j)
+	{
+		cout << it->second[j] << " ";
+	}
+		cout << endl;
+    }
+    
 }

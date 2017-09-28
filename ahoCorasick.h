@@ -1,6 +1,7 @@
 #include <vector>
 #include <utility>
 #include <string>
+#include <map>
 
 #ifndef AHO_CORASICK
 #define AHO_CORASICK
@@ -11,7 +12,7 @@ class ahoCorasick
 {
     private:
         vector<vector<pair<char, int> > > gotoState;
-
+	map<int, vector<string> > output;
     public:
 
         ahoCorasick();
