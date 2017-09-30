@@ -1,51 +1,39 @@
 #include <bits/stdc++.h>
+#define T 64
 
 using namespace std;
-
-class bitarray {
+class shiftOr{
 private:
-    int n;
-    deque<bool> data;
+    //bitarray[]
 public:
-    bitarray(int n){
-        this->n = n;
-        deque<bool> deck;
-        this->data = deck;
-        
-    }
-    bitarray(deque<bool> n){
-        this->n = n.size();
-        this->data = n;
-    }
-
-    deque<bool> getData(){
-        return this->data;
-    }
-
-    bitarray* operator&(bitarray* c){
-        deque<bool> a = this->getData(), b = c->getData();
-
-        deque<bool> r;
-        int m = max(a.size(), b.size());
-        for (int i=0; i<m; i++){
-            bool el;
-            if (a.size() >= i+1 && b.size() >= i+1){
-                el = a[i] & b[i];
-            } else if (a.size() >= i+1){
-                el = a[i];
-            } else{
-                el = b[i];
-            }
-            r.push_back(el);
+    shiftOr(){} 
+    ~shiftOr(){}
+    void action(string ppat, string stxt, bitset<T> & R){ //recebe 
+        int patsize = ppat.size();
+        int txtsize = stxt.size(); 
+        if (ppat != stxt.substr(txtsize-patsize,txtsize)){
+            std::cout << ppat << "!=" << stxt.substr(txtsize-patsize, txtsize) << std::endl;
+            R.set(patsize-1);
+        } else{
+            std::cout << ppat << "==" << stxt.substr(txtsize-patsize, txtsize) << std::endl;
         }
-        return new bitarray(r);
     }
 
-    void print(){
-        cout << "opa" << n << endl;
+    void action2(string pat, string txt){
+        int patsize = pat.size();
+        int txtsize = txt.size();
+        std::cout << "a" << std::endl;
+        for (int j=patsize-1; j<txtsize; j++){ //percorrendo as partes do texto
+            bitset<T> R;
+            for (int i=0; i<patsize; i++){ //tentando cada parte do padrao
+                action(pat.substr(0,i+1), txt.substr(0, j+1), R);
+            }
+            std::cout << R << std::endl;
+        }
     }
+
+
 };
-
 // map<string, string> char_mask(string pat, string* ab){
 //     map <string, string> masks = NULL;
 //     int m = pat.size();
@@ -58,10 +46,10 @@ public:
 //     deque<bool> a;
 // }
 
-int main()
-{
-    bitarray* opa = new bitarray(2);
-    opa->print();
+int main(){
+    shiftOr* s = new shiftOr();
+    s->action2("abra", "cadabra");
+    /*
     deque<int> deck;
     cout << "\n" << deck[0] << "\n";
     string a = "opa";
@@ -73,7 +61,7 @@ int main()
 
     for (map<string, string>::iterator it = dict.begin(); it != dict.end(); ++it)
         cout << it->first << " => " << it->second << '\n';
-
+*/
     return 0;
 }
 
