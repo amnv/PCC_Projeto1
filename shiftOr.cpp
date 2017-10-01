@@ -59,8 +59,8 @@ deque<int> shiftor(string txt, string pat, string ab){
     for (int i=0; i<txt.size(); i++){
         char e = txt[i];
         S = S << 1 | masks[e];
-        if (S[txt.size()-1] == 0){
-            occ.push_back(i-pat.size());
+        if (S[pat.size()-1] == 0){
+            occ.push_back(i-pat.size()+1);
         }
     }
     return occ;
@@ -78,9 +78,9 @@ string fprint(deque<P> a){
 }
 
 int main(){
-    string s = fprint(shiftor("abracadabra", "abra", "abcdr"));
+    string s = fprint(shiftor("church", "ch", "chur"));
     cout << s << endl;
-
+    
     /*
     deque<int> deck;
     cout << "\n" << deck[0] << "\n";
