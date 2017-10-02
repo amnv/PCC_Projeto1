@@ -1,79 +1,101 @@
 #include <bits/stdc++.h>
+#define T 64
 
 using namespace std;
-
-class bitarray {
+class shiftOr{
 private:
-    int n;
-    deque<bool> data;
+    //bitarray[]
 public:
-    bitarray(int n){
-        this->n = n;
-        deque<bool> deck;
-        this->data = deck;
-        
-    }
-    bitarray(deque<bool> n){
-        this->n = n.size();
-        this->data = n;
-    }
-
-    deque<bool> getData(){
-        return this->data;
-    }
-
-    bitarray* operator&(bitarray* c){
-        deque<bool> a = this->getData(), b = c->getData();
-
-        deque<bool> r;
-        int m = max(a.size(), b.size());
-        for (int i=0; i<m; i++){
-            bool el;
-            if (a.size() >= i+1 && b.size() >= i+1){
-                el = a[i] & b[i];
-            } else if (a.size() >= i+1){
-                el = a[i];
-            } else{
-                el = b[i];
-            }
-            r.push_back(el);
+    shiftOr(){} 
+    ~shiftOr(){}
+/*
+void action(string ppat, string stxt, bitset<T> & R){ //recebe pedaco do padrao e pedaco do texto e coloca em R 0 ou 1 
+        int patsize = ppat.size();
+        int txtsize = stxt.size(); 
+        if (ppat != stxt.substr(txtsize-patsize,txtsize)){
+            std::cout << ppat << "!=" << stxt.substr(txtsize-patsize, txtsize) << std::endl;
+            R.set(patsize-1);
+        } else{
+            std::cout << ppat << "==" << stxt.substr(txtsize-patsize, txtsize) << std::endl;
         }
-        return new bitarray(r);
     }
 
-    void print(){
-        cout << "opa" << n << endl;
+    void action2(string pat, string txt){
+        int patsize = pat.size();
+        int txtsize = txt.size();
+        std::cout << "a" << std::endl;
+        for (int j=patsize-1; j<txtsize; j++){ //percorrendo as partes do texto
+            bitset<T> R;
+            for (int i=0; i<patsize; i++){ //tentando cada parte do padrao
+                action(pat.substr(0,i+1), txt.substr(0, j+1), R);
+            }
+            std::cout << R << std::endl;
+        }
     }
+*/
 };
+map<char, bitset<T>> char_mask(string pat, string ab){
+    map <char, bitset<T>> masks; //as mascaras para cada letra do alfabeto
+    bitset<T> posmask = bitset<T>().set();
+    posmask.reset(0); //comecando com 111...0
 
-// map<string, string> char_mask(string pat, string* ab){
-//     map <string, string> masks = NULL;
-//     int m = pat.size();
-//     masks[]
-// }
+    for (int i=0; i<ab.size();i++){ //colocando bitset para cada elemento do alfabeto
+        char e = ab[i];
+        masks[e] = bitset<T>().set(); //comecando com 1
+    }
+    for (int i=0; i<pat.size(); i++){ 
+        char e = pat[i];
+        masks[e] &= posmask;
+        posmask = posmask << 1;
+        posmask[0] = 1; //ou 1
+    }
+    return masks;
+}
 
-// void shiftor(string txt, string pat, string* ab){
-//     int n = txt.size();
-//     int m = pat.size();
-//     deque<bool> a;
-// }
+void printDebug(deque<bitset<T>> deck, string pat, string txt){
+    cout << "  " << txt << endl;
+    for (int j=0; j<pat.size();j++){
+        cout << pat[j] << ' ';
+        for (int i=0; i<deck.size(); i++){
+            cout << deck[i][j];
+        }
+        cout << endl;
+    }
+}
 
-int main()
-{
-    bitarray* opa = new bitarray(2);
-    opa->print();
-    deque<int> deck;
-    cout << "\n" << deck[0] << "\n";
-    string a = "opa";
-    map<string, string> dict;
-    dict.insert(pair<string, string>("a", "asdas"));
-    dict.insert(pair<string, string>("b", "1"));
+deque<int> shiftor(string txt, string pat, string ab){
+    map<char, bitset<T>> masks = char_mask(pat, ab);
+    bitset <T> S;
+    S.set();
+    deque <int> occ;
+    deque <bitset<T>> debug;
+    for (int i=0; i<txt.size(); i++){
+        char e = txt[i];
+        S = S << 1 | masks[e];
+        if (S[pat.size()-1] == 0){
+            occ.push_back(i-pat.size()+1);
+        }
+        debug.push_back(S);
+    }
+    printDebug(debug, pat, txt);
+    return occ;
+}
 
-    cout << dict["a"] << endl;
+template <class P>
+string fprint(deque<P> a){
+    string r = "";
+    for(int i=0; i<a.size(); i++){
+        ostringstream oss;
+        oss << a[i];
+        r = r + oss.str() + " ";
+    }
+    return r;
+}
 
-    for (map<string, string>::iterator it = dict.begin(); it != dict.end(); ++it)
-        cout << it->first << " => " << it->second << '\n';
-
+int main(){
+    string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    string s = fprint(shiftor("babracadabrac", "abra", abc));
+    cout << "\n" << s << endl;
     return 0;
 }
 
@@ -81,4 +103,24 @@ int main()
 https://github.com/paguso/if76720172/commit/dd87fb4813623a1d1b415e115928cfe42a43afa9
 http://www.cin.ufpe.br/~paguso/courses/if767/bib/Baeza_1992.pdf
 http://www-igm.univ-mlv.fr/~lecroq/string/node6.html
+*/
+
+
+/** Algoritmos
+    funcao char_mask:
+    recebe o padrao e o alfabeto
+    masks eh um array de bitarray, tem 1 bitarray pra cada elemento do alfabeto
+    para cada elemento no alfabeto adiciona um indice bitarray no array masks com todos valores setados
+    cria-se um bitarray posmask com todos setados menos o ultimo
+    para cada elemento do padrao, faz-se que sua mascara eh sua mascara & a posmask, entao da-se um shift left na pos-mask e | 1 (coloca seu ultimo elemento como setado).
+    retorna o array de bitarrays, masks
+
+    funcao shift-of:
+    recebe o texto, o padrao e o alfabeto
+    cria-se o masks de todos caracteres do padrao
+    cria-se um bitarray S com tudo setado
+    para cada elemento do texto, faz-se S = S << 1 | masks[elemento], se bit mais significativo de S estah apagado, registra-se como ocorrencia a posicao do elemento - o tamanho do padrao (para o inicio da ocorrencia)
+
+    retorna as ocorrencias de match to padrao para aquele texto
+
 */
