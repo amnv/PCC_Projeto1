@@ -2,8 +2,12 @@
 #include <iostream>
 #include <utility>
 #include <map>
+#include <queue>
 
 using namespace std;
+
+#define FAIL -1
+#define ZERO 0
 
 ahoCorasick::ahoCorasick()
 {
@@ -27,7 +31,8 @@ int ahoCorasick::g(char c, int state)
             if (v[i].first == c) return v[i].second;
         }
     }
-    return -1;
+
+    return state == 0 ? ZERO : FAIL;
 }
 
 void ahoCorasick::buildGotoState(vector<string> pattern)
@@ -37,17 +42,26 @@ void ahoCorasick::buildGotoState(vector<string> pattern)
     for (int k = 0; k < pattern.size(); k++) 
     {
         string pat = pattern[k];
-
-        int i = 0;
+        int i = state = 0;
 
         //search the graph for a similar path        
-        while(state = g(pat[i], state) >= 0)
+        int aux;
+        while((aux = g(pat[i], state)) > 0)
         {
+            state = aux;
             i++;
         }
 
         //building new path in graph
-        for (; i < pat.size(); i++)
+        if (state < gotoState.size())
+        {
+            newState++;
+            gotoState[state].push_back(make_pair(pat[i], newState));
+            gotoState.push_back(vector<pair<char, int> >());
+            i++;
+        }
+        
+        for (; i < pat.size(); ++i)
         {   
             newState++;
             vector<pair<char, int> > v; 
@@ -55,8 +69,54 @@ void ahoCorasick::buildGotoState(vector<string> pattern)
             gotoState.push_back(v);
         }
 
-	output[newState].push_back(pat);
+	   output[newState].push_back(pat);
     }
+}
+
+
+void ahoCorasick::buildFail()
+{
+    queue<pair<char, int> > states;
+    failer.resize(gotoState.size(), FAIL);
+
+    vector<pair<char, int> > inicialState = gotoState[0];
+    for (int i = 0; i < inicialState.size(); i++)
+    {
+        states.push(inicialState[i]);
+        failer[inicialState[i].second] = 0;
+    }
+
+    while(!states.empty())
+    {
+        pair<char, int> r = states.front();
+        states.pop();
+
+
+        //adding edge list of r to queue
+        vector<pair<char, int> > aux = gotoState[r.second];
+        int failState;
+        for (int i = 0; i < aux.size(); i++)
+        {
+            states.push(aux[i]);
+
+            int state = failer[r.second];
+            while((failState = g(aux[i].first, state)) == FAIL) state = failer[state];
+            failer[aux[i].second] = failState;        
+        }
+
+        //adding output 
+        outputFromFail(r.second, failState);        
+    }
+}
+
+void ahoCorasick::outputFromFail(int r, int failState)
+{
+    if (output[r].size() > 0 && output[failState].size() > 0)
+    {
+        for (int i = 0; i < output[failState].size(); i++)
+            output[r].push_back(output[failState][i]);
+    }
+ //   cout << "asd" << endl;
 }
 
 void ahoCorasick::debug()
@@ -68,7 +128,9 @@ void ahoCorasick::debug()
     a.push_back("hers");
 
     buildGotoState(a);
+    buildFail();
 
+    //print g function
     for (int i = 0; i < gotoState.size(); ++i)
     {
         for (int j = 0; j < gotoState[i].size(); ++j)
@@ -79,14 +141,22 @@ void ahoCorasick::debug()
 	
     }
 
+    //print output function
     for (map<int, vector<string> >::iterator it = output.begin(); it != output.end(); ++it)
     {
-	cout << "estado " << it->first << " palavras " << endl;
+    cout << "estado " << it->first << " palavras " << endl;
         for (int j = 0; j < it->second.size(); ++j)
-	{
-		cout << it->second[j] << " ";
-	}
-		cout << endl;
+    {
+        cout << it->second[j] << " ";
+    }
+        cout << endl;
     }
     
+
+    //print f function
+    cout << "imprimindo f function" << endl;
+    for (int i = 0; i < failer.size(); ++i)
+    {
+        cout << "estado " << i << " goto " << failer[i] << endl;
+    }
 }

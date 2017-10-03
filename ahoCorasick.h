@@ -11,8 +11,11 @@ using namespace std;
 class ahoCorasick
 {
     private:
-        vector<vector<pair<char, int> > > gotoState;
-	map<int, vector<string> > output;
+       //edge list -> pair charecter and next state position
+       vector<vector<pair<char, int> > > gotoState;
+       vector<int> failer;
+	   map<int, vector<string> > output;
+
     public:
 
         ahoCorasick();
@@ -20,6 +23,8 @@ class ahoCorasick
         
         int g(char c, int state);
         void buildGotoState(vector<string> pattern);
+        void buildFail();
+        void outputFromFail(int r, int failState);
         void debug();
 };
 
