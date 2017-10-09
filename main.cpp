@@ -44,8 +44,9 @@ int main(int argc, char **argv)
     queue<string> files;
     bool count = false;
 
-    ahoCorasick a;
-    a.debug();
+
+   seller s("abracadabra", "abra", 2);
+   s.debbug();
 
     return 0;
 

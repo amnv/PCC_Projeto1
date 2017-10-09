@@ -9,9 +9,10 @@ using namespace std;
 #define FAIL -1
 #define ZERO 0
 
-ahoCorasick::ahoCorasick()
+ahoCorasick::ahoCorasick(string text, vector<string> pattern): text(text), pattern(pattern) 
 {
-
+    buildGotoState();
+    buildFail();
 }
 
 ahoCorasick::~ahoCorasick()
@@ -35,7 +36,7 @@ int ahoCorasick::g(char c, int state)
     return state == 0 ? ZERO : FAIL;
 }
 
-void ahoCorasick::buildGotoState(vector<string> pattern)
+void ahoCorasick::buildGotoState()
 {
     int state = 0, newState = 0;
     //start point
@@ -93,7 +94,7 @@ void ahoCorasick::buildFail()
 
 
         //adding edge list of r to queue
-        vector<pair<char, int> > aux = gotoState[r.second];
+        vector<pair<char, int> > aux = gotoState[r.second   ];
         int failState;
         for (int i = 0; i < aux.size(); i++)
         {
@@ -102,22 +103,44 @@ void ahoCorasick::buildFail()
             int state = failer[r.second];
             while((failState = g(aux[i].first, state)) == FAIL) state = failer[state];
             failer[aux[i].second] = failState;        
+            //adding output 
+            outputFromFail(aux[i].second, failState);        
         }
-
-        //adding output 
-        outputFromFail(r.second, failState);        
     }
 }
 
 void ahoCorasick::outputFromFail(int r, int failState)
 {
-    if (output[r].size() > 0 && output[failState].size() > 0)
+    if (output[r].size() > 0)
     {
         for (int i = 0; i < output[failState].size(); i++)
             output[r].push_back(output[failState][i]);
     }
  //   cout << "asd" << endl;
 }
+
+map<string, int> ahoCorasick::execute()
+{
+    int state = 0, newState = 0;
+    map<string, int> v;
+    for (int i = 0; i < text.size(); i++)
+    {
+        while((newState = g(state, text[i])) == FAIL) state = failer[state];
+
+        if (!output[newState].size())
+        {
+            cout << newState << " " ;
+            for (int j = 0; j < output[newState].size(); ++j)
+            {
+                cout << output[newState][j] << endl;
+            }
+            
+        }
+    }
+
+    return v;
+}
+
 
 void ahoCorasick::debug()
 {
@@ -127,7 +150,7 @@ void ahoCorasick::debug()
     a.push_back("his");
     a.push_back("hers");
 
-    buildGotoState(a);
+    buildGotoState();
     buildFail();
 
     //print g function
