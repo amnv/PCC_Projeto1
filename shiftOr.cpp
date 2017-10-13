@@ -1,5 +1,7 @@
-#include <bits/stdc++.h>
 #include "shiftOr.h"
+#include <iostream>
+#include <sstream>
+#include <string>
 #define T 64
 
 shiftOr::shiftOr(string txt, string pat, string ab, bool debug = false) {
@@ -78,6 +80,17 @@ void shiftOr::debug(){
     shiftOr* alg = new shiftOr("babracadabrac", "abra", abc);
     string s = fprint(alg->occ());
     std::cout << "\n" << s << std::endl;
+
+    delete alg;
+}
+
+void shiftOr::setPat(string pat){
+    
+}
+
+
+void shiftOr::setText(string text) {
+
 }
 
 /*

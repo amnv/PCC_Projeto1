@@ -1,7 +1,10 @@
 #ifndef SHIFT_OR
 #define SHIFT_OR
 
-#include <bits/stdc++.h>
+#include <bitset>
+#include <map>
+#include <deque>
+
 #include "Algorithm.h"
 #define T 64
 
@@ -20,6 +23,8 @@ public:
     static string fprint(deque<P> a);
     void debug();
     deque<int> occ();
+    void setPat(string);
+    void setText(string);
 };
 
 #endif
