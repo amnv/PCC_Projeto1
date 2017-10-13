@@ -1,11 +1,13 @@
 #ifndef WUMANBER
 #define WU_MANBER
 
-class WuManber
-{
+#include "shiftOr.h"
+
+class WuManber : public shiftOr{
 public:
     WuManber();
     ~WuManber();
+
     
 };
 
