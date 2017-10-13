@@ -35,6 +35,7 @@ int main(int argc, char **argv)
         -p --pattern patternfile
         -a --algorithm algorithm_name
         -c --count
+        -h --help
     */
     int optc = 0;
     int editDistance = 0;
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
     string algorithm_name;
     queue<string> files;
     bool count = false;
-
+    bool help = false;
 /*
    seller s("abracadabra", "abra", 2);
    s.debbug();
@@ -57,7 +58,6 @@ int main(int argc, char **argv)
     ahoCorasick a("his asd her hers", v);
   a.debug();
 */
-    return 0;
 
     //no_argument = 0, required_argument = 1, opcional_argument = 2
     const struct option optionArray[] = {
@@ -65,6 +65,7 @@ int main(int argc, char **argv)
         {"pattern", required_argument, NULL, 'p'},
         {"algorithm_name", required_argument, NULL, 'a'},
         {"count", no_argument, NULL, 'c'},
+        {"help", no_argument, NULL, 'h'},
         {0, 0, 0, 0}
     };
 
@@ -88,32 +89,49 @@ int main(int argc, char **argv)
                 count = true;
                 cout << "count" << endl;
                 break;
+            case 'h':
+                help = true;
+                cout << "help" << endl;
+                break;
             default:
                 cout << "codigo digitado errado" << endl;
                 return 1;
         }
    }
 
+   if (help)
+   {
+       cout << "Os seguintes parametros podem ser utilizados: \n\
+       -e --edit Emax\n\
+       -p --pattern patternfile\n\
+       -a --algorithm algorithm_name\n\
+       -c --count\n\
+       -h --help!\n";
 
+       return 1;
+   }
+   
    //optind pega argumentos restantes
    //variavel de getopt
    if (optind >= argc)
    {
-        cout << "Erro! Falta dados" << endl;
-        return 1;
-   }
-
-   pattern = argv[optind++];
-
-   while(optind < argc) files.push(argv[optind++]);
-
-   if (files.empty()) cout << "Erro! Falta dados" << endl;
-
-   while(!files.empty())
-   {
+       cout << "Erro! Falta dados" << endl;
+       return 1;
+    }
+    
+    pattern = argv[optind++];
+    
+    while(optind < argc) files.push(argv[optind++]);
+    
+    if (files.empty()) cout << "Erro! Falta dados" << endl;
+    
+    while(!files.empty())
+    {
         cout << files.front() << endl;
         files.pop();
-   } 
+    } 
 
-   return 0;
+    
+    
+    return 0;
 }
