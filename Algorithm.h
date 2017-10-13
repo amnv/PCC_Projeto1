@@ -6,8 +6,8 @@
 class Algorithm 
 {
 public:
-    virtual int count(); //imprime a qtde total de ocorrencias
-    virtual std::deque<int> occ(); //lista as linhas das ocorrencias
+    virtual int count() = 0; //imprime a qtde total de ocorrencias
+    virtual std::deque<int> occ() = 0; //lista as linhas das ocorrencias
     
 };
 

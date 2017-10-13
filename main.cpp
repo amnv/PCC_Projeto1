@@ -44,10 +44,19 @@ int main(int argc, char **argv)
     queue<string> files;
     bool count = false;
 
-
+/*
    seller s("abracadabra", "abra", 2);
    s.debbug();
-
+*/
+ /*   vector<string> v;
+    v.push_back("he");
+    v.push_back("she");
+    v.push_back("his");
+    v.push_back("hers");
+    
+    ahoCorasick a("his asd her hers", v);
+  a.debug();
+*/
     return 0;
 
     //no_argument = 0, required_argument = 1, opcional_argument = 2

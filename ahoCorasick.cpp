@@ -92,17 +92,16 @@ void ahoCorasick::buildFail()
         pair<char, int> r = states.front();
         states.pop();
 
-
         //adding edge list of r to queue
-        vector<pair<char, int> > aux = gotoState[r.second   ];
+        vector<pair<char, int> > aux = gotoState[r.second];
         int failState;
         for (int i = 0; i < aux.size(); i++)
         {
             states.push(aux[i]);
-
             int state = failer[r.second];
             while((failState = g(aux[i].first, state)) == FAIL) state = failer[state];
             failer[aux[i].second] = failState;        
+
             //adding output 
             outputFromFail(aux[i].second, failState);        
         }

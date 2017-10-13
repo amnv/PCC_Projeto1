@@ -2,13 +2,14 @@
 #include <utility>
 #include <string>
 #include <map>
+#include "Algorithm.h"
 
 #ifndef AHO_CORASICK
 #define AHO_CORASICK
 
 using namespace std;
 
-class ahoCorasick
+class ahoCorasick : public Algorithm
 {
     private:
       //edge list -> pair charecter and next state position

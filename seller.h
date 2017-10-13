@@ -1,12 +1,15 @@
 #include <vector>
 #include <string>
+#include <deque>
+
+#include "AlgorithmApproximate.h"
 
 #ifndef SELLER
 #define SELLER
 
 using namespace std;
 
-class seller
+class seller 
 {
 private:
     string text;
