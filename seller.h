@@ -2,8 +2,6 @@
 #include <string>
 #include <deque>
 
-#include "AlgorithmApproximate.h"
-
 #ifndef SELLER
 #define SELLER
 

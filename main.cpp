@@ -9,6 +9,8 @@
 #include "ahoCorasick.h"
 #include "shiftOr.h"
 
+#define NAO_SETADA -1
+
 using namespace std;
 
 /*
@@ -38,7 +40,7 @@ int main(int argc, char **argv)
         -h --help
     */
     int optc = 0;
-    int editDistance = 0;
+    int editDistance = NAO_SETADA;
     string pattern;
     string patternfileName;
     string algorithm_name;
@@ -76,19 +78,15 @@ int main(int argc, char **argv)
             case 'e':
                 editDistance = charToInt(optarg);
                 //editDistance = optarg;
-                break;
             case 'p':
                 patternfileName = optarg;
                 cout << "pattern" << endl;
-                break;
             case 'a':
                 algorithm_name = optarg;
                 cout << "algorithm" << endl;
-                break;
             case 'c':
                 count = true;
                 cout << "count" << endl;
-                break;
             case 'h':
                 help = true;
                 cout << "help" << endl;
@@ -106,8 +104,11 @@ int main(int argc, char **argv)
        -p --pattern patternfile\n\
        -a --algorithm algorithm_name\n\
        -c --count\n\
-       -h --help!\n";
+       -h --help!\n
+       lista de algoritmos implementados..
+       ";
 
+       //Encerra execucao do programa
        return 1;
    }
    
@@ -131,7 +132,9 @@ int main(int argc, char **argv)
         files.pop();
     } 
 
-    
+    Algorithm Algorithm = escolheAlgoritmo();
+
+    Algorithm.execute();
     
     return 0;
 }
