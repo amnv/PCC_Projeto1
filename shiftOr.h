@@ -1,12 +1,25 @@
-#ifndef SHITF_OR
-#define SHITF_OR
+#ifndef SHIFT_OR
+#define SHIFT_OR
 
-class shitOr
-{
+#include <bits/stdc++.h>
+#include "Algorithm.h"
+#define T 64
+
+
+using namespace std;
+class shiftOr : public Algorithm{
+private:
+    deque<int> r;
 public:
-    shitOr();
-    ~shitOr();
-    
+    shiftOr(string, string, string, bool);
+    // ~shiftOr();
+    int count();
+    static map<char, bitset<T>> charMask(string, string);
+    static void printDebug(deque<bitset<T>>, string, string);
+    template <class P>
+    static string fprint(deque<P> a);
+    void debug();
+    deque<int> occ();
 };
 
 #endif
