@@ -82,20 +82,27 @@ int shiftOr::count(){
     return n;
 }
 
-deque<int> shiftOr::occ() { 
+deque<string> shiftOr::occ() { 
     /** Retorna todas as linhas do arquivo que ocorreram o pat */
     this->reloadFile();
-    deque<int> n;
-    int i=0;
+    deque<string> n;
     string line;
     while (this->getLine(line)) {
         if (this->execute(line).size() > 0) { //ha ao menos 1 caso nessa linha
-            std::cout << line << std::endl;
-            n.push_back(i);
+            n.push_back(line);
         }
-        i++;
     }
     return n;
+}
+
+string shiftOr::getPat() {
+    /** Para classe filha acessar */
+    return this->pat;
+}
+
+map<char, bitset<T>> shiftOr::getMasks() {
+    /** Para classe filha acessar */
+    return this->masks;
 }
 
 // void shiftOr::debug(){
@@ -115,11 +122,6 @@ void shiftOr::setPat(string pat){
     // string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     this->masks = charMask(pat, abc);
     this->pat = pat;
-}
-
-std::deque<int> shiftOr::dist() {
-    deque<int> r;
-    return r;
 }
 
 /*

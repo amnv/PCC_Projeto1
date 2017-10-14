@@ -24,9 +24,11 @@ public:
     // template <class P>
     // static string fprint(deque<P> a);
     // void debug();
-    deque<int> occ();
+    deque<string> occ();
     void setPat(string);
     deque<int> dist();
+    string getPat();
+    map<char, bitset<T>> getMasks();
 };
 
 #endif
