@@ -1,13 +1,16 @@
-#include <vector>
-#include <string>
-#include <deque>
 
 #ifndef SELLER
 #define SELLER
 
+#include <vector>
+#include <string>
+#include <deque>
+
+#include "Algorithm.h"
+
 using namespace std;
 
-class seller 
+class seller : public Algorithm
 {
 private:
     string text;

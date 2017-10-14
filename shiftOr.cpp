@@ -5,7 +5,7 @@
 #define T 64
 
 shiftOr::shiftOr(string txt, string pat, string ab, bool debug = false) {
-    map<char, bitset<T>> masks = charMask(pat, ab);
+    map<char, bitset<T> > masks = charMask(pat, ab);
     bitset <T> S;
     S.set();
     deque <int> occ;

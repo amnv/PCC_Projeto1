@@ -2,8 +2,9 @@
 #define WU_MANBER
 
 #include "shiftOr.h"
+#include "Algorithm.h"
 
-class WuManber : public shiftOr{
+class WuManber : public shiftOr, Algorithm {
 public:
     WuManber(string texto, string pattern, string err);
     ~WuManber();
