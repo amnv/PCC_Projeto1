@@ -191,7 +191,7 @@ int ahoCorasick::count()
 
 }
 
-deque<int> ahoCorasick::occ()
+deque<string> ahoCorasick::occ()
 {
 
 }
@@ -204,9 +204,4 @@ void ahoCorasick::setPat(std::string pat)
 void ahoCorasick::setText(std::string text)
 {
     
-}
-
-std::deque<int> ahoCorasick::dist() {
-    deque<int> r;
-    return r;
 }

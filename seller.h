@@ -23,10 +23,9 @@ public:
     vector<int> newColumn(vector<int>col, int i);
     void debbug();
     int count(); //imprime a qtde total de ocorrencias
-    deque<int> occ(); //lista as linhas das ocorrencias
+    deque<string> occ(); //lista as linhas das ocorrencias
     void setPat(string pat);
     void setText(string text);
-    deque<int> dist(); //localiza as ocorrencias aproximadas do padrao a uma distancia de edicao maxima e
 };
 
 #endif

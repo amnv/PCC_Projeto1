@@ -114,7 +114,7 @@ void Decisao::executa()
     }
     else if (this->editDistance >= 0)
     {
-        algorithm->dist();
+        algorithm->occ();
     }
 }
 

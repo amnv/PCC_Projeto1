@@ -2,7 +2,8 @@
 #include <getopt.h> // *GNU* Para o getopt_long()
 #include <string>
 #include <queue>
-
+#include "Algorithm.h"
+#include "wuManber.h"
 
 
 #define NAO_SETADA -1
@@ -28,6 +29,9 @@ int charToInt(char* texto)
 
 int main(int argc, char **argv)
 {
+    Algorithm* a = new WuManber("./main.cpp", "abc", 1);
+    cout << a->count() << endl;
+    return 0;
     /*fazer os seguinte padroes
         -e --edit Emax
         -p --pattern patternfile

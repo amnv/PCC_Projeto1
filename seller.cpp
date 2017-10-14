@@ -65,15 +65,11 @@ void seller::setText(string text)
 {
 
 }
-deque<int> seller::dist()
-{
-    
-}
 
 int seller::count() {
 
 }
 
-deque<int> seller::occ() {
+deque<string> seller::occ() {
 
 }
