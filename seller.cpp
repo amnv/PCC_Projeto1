@@ -52,3 +52,16 @@ void seller::debbug()
     cout << v[i] << endl;
   }
 }
+
+void setPat(std::string pat)
+{
+
+}
+void setText(std::string text)
+{
+
+}
+deque<int> dist(int e)
+{
+    
+}

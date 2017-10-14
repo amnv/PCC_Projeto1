@@ -4,12 +4,16 @@
 #include "shiftOr.h"
 #include "Algorithm.h"
 
-class WuManber : public shiftOr, Algorithm {
+class WuManber : public shiftOr {
 public:
     WuManber(string texto, string pattern, string err);
     ~WuManber();
 
-    
+    virtual int count() = 0; //imprime a qtde total de ocorrencias
+    virtual std::deque<int> occ() = 0; //lista as linhas das ocorrencias
+    virtual void setPat(std::string pat) = 0;
+    virtual void setText(std::string text) = 0;
+    virtual std::deque<int> dist() = 0; //localiza as ocorrencias aproximadas do padrao a uma distancia de edicao maxima e
 };
 
 #endif
