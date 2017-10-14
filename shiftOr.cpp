@@ -1,32 +1,37 @@
 #include "shiftOr.h"
 #include <iostream>
-#include <sstream>
+// #include <sstream>
 #include <string>
 #define T 64
 
-shiftOr::shiftOr(string txt, string pat, string ab, bool debug = false) {
-    map<char, bitset<T> > masks = charMask(pat, ab);
+shiftOr::shiftOr(string path, string pat) : Algorithm (path) {
+    this->setPat(pat);
+}
+
+deque<int> shiftOr::execute(string txt) {
+    /** Dada uma string, diz em que local dela o pat se encontra */
     bitset <T> S;
     S.set();
     deque <int> occ;
-    deque <bitset<T>> d;
+    // deque <bitset<T>> d;
     for (int i=0; i<txt.size(); i++){
         char e = txt[i];
         S = S << 1 | masks[e];
         if (S[pat.size()-1] == 0){
             occ.push_back(i-pat.size()+1);
         }
-        if (debug == true) {
-            d.push_back(S);
-        }
+        // if (debug == true) {
+        //     d.push_back(S);
+        // }
     }
-    if (debug) {
-        printDebug(d, pat, txt);
-    }
-    this->r = occ;
+    // if (debug) {
+    //     printDebug(d, pat, txt);
+    // }
+    // std::cout << txt << " " << occ.size() << std::endl;
+    return occ;
 }
 
- map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
+map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
     map <char, bitset<T>> masks; //as mascaras para cada letra do alfabeto
     bitset<T> posmask = bitset<T>().set();
     posmask.reset(0); //comecando com 111...0
@@ -44,53 +49,77 @@ shiftOr::shiftOr(string txt, string pat, string ab, bool debug = false) {
     return masks;
 }
 
- void shiftOr::printDebug(deque<bitset<T>> deck, string pat, string txt){
-    cout << "  " << txt << endl;
-    for (int j=0; j<pat.size();j++){
-        cout << pat[j] << ' ';
-        for (int i=0; i<deck.size(); i++){
-            cout << deck[i][j];
-        }
-        cout << endl;
-    }
-}
+// void shiftOr::printDebug(deque<bitset<T>> deck, string pat, string txt){
+//     cout << "  " << txt << endl;
+//     for (int j=0; j<pat.size();j++){
+//         cout << pat[j] << ' ';
+//         for (int i=0; i<deck.size(); i++){
+//             cout << deck[i][j];
+//         }
+//         cout << endl;
+//     }
+// }
 
-
-template <class P>
-string shiftOr::fprint(deque<P> a){
-    string r = "";
-    for(int i=0; i<a.size(); i++){
-        ostringstream oss;
-        oss << a[i];
-        r = r + oss.str() + " ";
-    }
-    return r;
-}
+// template <class P>
+// string shiftOr::fprint(deque<P> a){
+//     string r = "";
+//     for(int i=0; i<a.size(); i++){
+//         ostringstream oss;
+//         oss << a[i];
+//         r = r + oss.str() + " ";
+//     }
+//     return r;
+// }
 
 int shiftOr::count(){
-    return 0;
+    /** Retorna a qtde total de ocorrencias de pat no arquivo*/
+    this->reloadFile();
+    int n = 0;
+    string line;
+    while (this->getLine(line)) {
+        n += this->execute(line).size();
+    }
+    return n;
 }
 
 deque<int> shiftOr::occ() { 
-    return this->r;
+    /** Retorna todas as linhas do arquivo que ocorreram o pat */
+    this->reloadFile();
+    deque<int> n;
+    int i=0;
+    string line;
+    while (this->getLine(line)) {
+        if (this->execute(line).size() > 0) { //ha ao menos 1 caso nessa linha
+            std::cout << line << std::endl;
+            n.push_back(i);
+        }
+        i++;
+    }
+    return n;
 }
 
-void shiftOr::debug(){
-    string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    shiftOr* alg = new shiftOr("babracadabrac", "abra", abc);
-    string s = fprint(alg->occ());
-    std::cout << "\n" << s << std::endl;
+// void shiftOr::debug(){
+//     shiftOr* alg = new shiftOr("babracadabrac", "abra", abc);
+//     string s = fprint(alg->occ());
+//     std::cout << "\n" << s << std::endl;
 
-    delete alg;
-}
+//     delete alg;
+// }
 
 void shiftOr::setPat(string pat){
-    
+    char ab[128];
+    for (char i='\0'; i != 127; i++) {
+        ab[i] = i;
+    }
+    string abc(ab, 128);
+    // string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    this->masks = charMask(pat, abc);
+    this->pat = pat;
 }
 
-
-void shiftOr::setText(string text) {
-
+std::deque<int> shiftOr::dist() {
+    deque<int> r;
+    return r;
 }
 
 /*
