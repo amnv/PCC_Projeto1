@@ -30,6 +30,10 @@ class ahoCorasick : public Algorithm
         void outputFromFail(int r, int failState);
         void debug();
         map<string, int> execute();
+        int count(); //imprime a qtde total de ocorrencias
+        deque<int> occ(); //lista as linhas das ocorrencias
+        void setPat(std::string pat);
+        void setText(std::string text);
 };
 
 #endif

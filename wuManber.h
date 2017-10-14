@@ -5,7 +5,7 @@
 
 class WuManber : public shiftOr{
 public:
-    WuManber();
+    WuManber(string texto, string pattern, string err);
     ~WuManber();
 
     

@@ -3,11 +3,7 @@
 #include <string>
 #include <queue>
 
-//algorithm implementation
-#include "seller.h"
-#include "wuManber.h"
-#include "ahoCorasick.h"
-#include "shiftOr.h"
+
 
 #define NAO_SETADA -1
 

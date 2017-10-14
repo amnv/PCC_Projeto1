@@ -9,7 +9,7 @@ class Decisao
 {
 private:
     vector<string> pat;
-    Algorithm algorithm;
+    Algorithm* algorithm;
     int editDistance;
     string pattern;
     string patternfileName;
@@ -20,9 +20,10 @@ private:
     Algorithm nameToALgo();
 public:
     Decisao(int editDistance,string pattern, string patternfileName, string algorithm_name, queue<string> files, bool count);
+    ~Decisao();
     void escolhePadrao();
     void escolheAlg();
     void executa(); //escolhe algoritmo e acao correta a ser executado
 };
-
+\
 #endif
