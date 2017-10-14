@@ -110,11 +110,17 @@ void Decisao::executa()
     //escolhe qual funcao executar
     if (this->count)
     {
-        algorithm->count();
+        cout << "Quantidade total de ocorrencias " << algorithm->count() << endl;
     }
-    else if (this->editDistance >= 0)
+    else
     {
-        algorithm->dist();
+        deque<int> d = algorithm->occ();
+        cout << "ocorrencias nas linhas" << endl;
+        for(int i = 0; i < d.size(); i++)
+        {
+            cout "linha: " << d[i] << " ";
+        }
+        cout << endl;
     }
 }
 

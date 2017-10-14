@@ -3,7 +3,7 @@
 #include <string>
 #include <queue>
 
-
+#include "Decisao.h"
 
 #define NAO_SETADA -1
 
@@ -129,5 +129,8 @@ int main(int argc, char **argv)
     } 
 
     //adicionar classe decisao que fara isso
+    Decisao decisao(editDistance, pattern, patternfileName, algorithm_name, files, count);
+    decisao.executa();
+
     return 0;
 }
