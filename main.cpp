@@ -100,8 +100,8 @@ int main(int argc, char **argv)
        -p --pattern patternfile\n\
        -a --algorithm algorithm_name\n\
        -c --count\n\
-       -h --help!\n
-       lista de algoritmos implementados..
+       -h --help!\n\
+       lista de algoritmos implementados..\
        ";
 
        //Encerra execucao do programa
@@ -128,9 +128,6 @@ int main(int argc, char **argv)
         files.pop();
     } 
 
-    Algorithm Algorithm = escolheAlgoritmo();
-
-    Algorithm.execute();
-    
+    //adicionar classe decisao que fara isso
     return 0;
 }

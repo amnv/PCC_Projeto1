@@ -117,6 +117,10 @@ void shiftOr::setPat(string pat){
     this->pat = pat;
 }
 
+std::deque<int> shiftOr::dist() {
+    deque<int> r;
+    return r;
+}
 
 /*
 https://github.com/paguso/if76720172/commit/dd87fb4813623a1d1b415e115928cfe42a43afa9

@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
 
 //algorithm implementation
+#include "Decisao.h"
 #include "seller.h"
 #include "wuManber.h"
 #include "ahoCorasick.h"
 #include "shiftOr.h"
+#include "Algorithm.h"
 
 Decisao::Decisao(int editDistance, string pattern, string patternfileName, string algorithm_name, queue<string> files, bool count)
 {
@@ -43,8 +45,7 @@ void Decisao::escolheAlg()
     if (this->algorithm_name.size() > 0)
     {
         this->nameToALgo();
-        Algorithm a(arg);
-        a.executa()
+        this->executa();
     }
     else 
     {
@@ -53,11 +54,11 @@ void Decisao::escolheAlg()
             //usa um dos algoritmos NAO exatos    
             if (pat[0].size() > 64)
             {
-                this->algorithm = new seller(this->files[0], this->pat[0], this->err);
+                this->algorithm = new seller(this->files.front(), this->pat[0], this->editDistance);
             }
             else
             {
-                this->algorithm = new WuManber(this->files[0], this->pat[0], this->err);
+                this->algorithm = new WuManber(this->files.front(), this->pat[0], this->editDistance);
             }
         } 
         else
@@ -65,36 +66,36 @@ void Decisao::escolheAlg()
             //usa um dos algoritmos  exatos    
             if (pat.size() > 1)
             {
-                this->algorithm = new ahoCorasick(this->files[0], this->pat[0]);
+                this->algorithm = new ahoCorasick(this->files.front(), this->pat[0]);
             }
             else 
             {
-                string file = fileToString(0);
-                this->algorithm = new shiftOr(file, this->pat[0]);
+                this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
             }
         }
+        this->files.pop();
     }
-
+    
 
 }
 
-Algorithm* Decisao::nameToALgo()
+void Decisao::nameToALgo()
 {
     if (this->algorithm_name == "ahocorasick")
     {
-        this->algorithm = new ahoCorasick(this->files[0], this->pat[0]);
+        this->algorithm = new ahoCorasick(this->files.front(), pat);
     }
     else if (this->algorithm_name == "seller")
     {
-        this->algorithm = new seller(this->files[0], this->pat[0], this->err);
+        this->algorithm = new seller(this->files.front(), this->pat, this->editDistance);
     }
     else if (this->algorithm_name == "WuManber")
     {
-        this->algorithm = new WuManber(this->files[0], this->pat[0], this->err);
+        this->algorithm = new WuManber(this->files.front(), this->pat[0], this->editDistance);
     }
     else if (this->algorithm_name == "shiftOr")
     {
-        this->algorithm = new shiftOr(this->files[0], this->pat[0]);
+        this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
     }
     else 
     {
@@ -110,10 +111,12 @@ void Decisao::executa()
     //escolhe qual funcao executar
     if (this->count)
     {
-        this->algorithm->count();
+        algorithm->count();
     }
     else if (this->editDistance >= 0)
     {
-        this->algorithm.dist();
+        algorithm->dist();
     }
 }
+
+

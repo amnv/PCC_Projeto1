@@ -26,6 +26,7 @@ public:
     // void debug();
     deque<int> occ();
     void setPat(string);
+    deque<int> dist();
 };
 
 #endif
