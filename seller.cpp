@@ -1,14 +1,18 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-
+// #include <iostream>
+// #include <vector>
+// #include <string>
+// #include <algorithm>
+#include<bits/stdc++.h>
+// #include "Algorithm.h"
 #include "seller.h"
 
 using namespace std;
 
-seller::seller(string text, string pattern, int err) : text(text), pattern(pattern), err(err) {}
-seller::~seller(){}
+seller::seller(string path, string pattern, int err) : Algorithm (path){
+    this->pattern = pattern;
+    this->err = err;
+}
+// seller::~seller(){}
 
 vector<int> seller::newColumn(vector<int> col, int j)
 {
@@ -53,15 +57,23 @@ void seller::debbug()
   }
 }
 
-void setPat(std::string pat)
+void seller::setPat(string pat)
 {
 
 }
-void setText(std::string text)
+void seller::setText(string text)
 {
 
 }
-deque<int> dist(int e)
+deque<int> seller::dist()
 {
     
+}
+
+int seller::count() {
+
+}
+
+deque<int> seller::occ() {
+
 }

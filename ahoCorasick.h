@@ -21,7 +21,7 @@ class ahoCorasick : public Algorithm
 
     public:
 
-        ahoCorasick(string text, vector<string> pattern);
+        ahoCorasick(string path, vector<string> pattern);
         ~ahoCorasick();
         
         int g(char c, int state);
@@ -34,6 +34,7 @@ class ahoCorasick : public Algorithm
         deque<int> occ(); //lista as linhas das ocorrencias
         void setPat(std::string pat);
         void setText(std::string text);
+        deque<int> dist();
 };
 
 #endif

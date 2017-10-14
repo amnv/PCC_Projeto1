@@ -4,6 +4,8 @@ Algorithm::Algorithm(string path) {
     // file.open(path);
     this->path = path;
 }
+Algorithm::~Algorithm()
+{}
 
 bool Algorithm::getLine(string& line) {
 /** Retorna a próxima linha do arquivo, se não existir o retorno é NULL */

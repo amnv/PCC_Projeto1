@@ -1,15 +1,16 @@
 #include "ahoCorasick.h"
-#include <iostream>
-#include <utility>
-#include <map>
-#include <queue>
+// #include <iostream>
+// #include <utility>
+// #include <map>
+// #include <queue>
+#include<bits/stdc++.h>
 
 using namespace std;
 
 #define FAIL -1
 #define ZERO 0
 
-ahoCorasick::ahoCorasick(string text, vector<string> pattern): text(text), pattern(pattern) 
+ahoCorasick::ahoCorasick(string path, vector<string> pattern): Algorithm (path), pattern(pattern) 
 {
     buildGotoState();
     buildFail();
@@ -141,6 +142,8 @@ map<string, int> ahoCorasick::execute()
 }
 
 
+
+
 void ahoCorasick::debug()
 {
     vector<string> a;
@@ -183,23 +186,27 @@ void ahoCorasick::debug()
     }
 }
 
-int count()
+int ahoCorasick::count()
 {
 
 }
 
-deque<int> occ()
+deque<int> ahoCorasick::occ()
 {
 
 }
 
-void setPat(std::string pat)
+void ahoCorasick::setPat(std::string pat)
 {
 
 }
 
-void setText(std::string text)
+void ahoCorasick::setText(std::string text)
 {
     
 }
 
+std::deque<int> ahoCorasick::dist() {
+    deque<int> r;
+    return r;
+}

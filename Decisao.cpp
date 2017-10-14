@@ -2,11 +2,11 @@
 
 //algorithm implementation
 #include "Decisao.h"
+#include "Algorithm.h"
 #include "seller.h"
 #include "wuManber.h"
 #include "ahoCorasick.h"
 #include "shiftOr.h"
-#include "Algorithm.h"
 
 Decisao::Decisao(int editDistance, string pattern, string patternfileName, string algorithm_name, queue<string> files, bool count)
 {
@@ -65,7 +65,7 @@ void Decisao::escolheAlg()
             //usa um dos algoritmos  exatos    
             if (pat.size() > 1)
             {
-                this->algorithm = new ahoCorasick(this->files.front(), this->pat[0]);
+                this->algorithm = new ahoCorasick(this->files.front(), this->pat);
             }
             else 
             {
@@ -86,7 +86,7 @@ void Decisao::nameToALgo()
     }
     else if (this->algorithm_name == "seller")
     {
-        this->algorithm = new seller(this->files.front(), this->pat, this->editDistance);
+        this->algorithm = new seller(this->files.front(), this->pat[0], this->editDistance);
     }
     else if (this->algorithm_name == "WuManber")
     {
