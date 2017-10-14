@@ -182,3 +182,24 @@ void ahoCorasick::debug()
         cout << "estado " << i << " goto " << failer[i] << endl;
     }
 }
+
+int count()
+{
+
+}
+
+deque<int> occ()
+{
+
+}
+
+void setPat(std::string pat)
+{
+
+}
+
+void setText(std::string text)
+{
+    
+}
+

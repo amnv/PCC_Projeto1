@@ -26,7 +26,7 @@ public:
     deque<int> occ(); //lista as linhas das ocorrencias
     void setPat(std::string pat);
     void setText(std::string text);
-    deque<int> dist(int e) = 0; //localiza as ocorrencias aproximadas do padrao a uma distancia de edicao maxima e
+    deque<int> dist(int e); //localiza as ocorrencias aproximadas do padrao a uma distancia de edicao maxima e
 };
 
 #endif

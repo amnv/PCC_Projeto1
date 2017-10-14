@@ -26,5 +26,4 @@ public:
     void executa(); //escolhe algoritmo e acao correta a ser executado
     void nameToALgo();
 };
-\
 #endif

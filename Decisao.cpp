@@ -10,7 +10,6 @@
 
 Decisao::Decisao(int editDistance, string pattern, string patternfileName, string algorithm_name, queue<string> files, bool count)
 {
-    this->optc = optc;
     this->editDistance = editDistance;
     this->pattern = pattern;
     this->patternfileName = patternfileName;
