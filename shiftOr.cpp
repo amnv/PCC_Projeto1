@@ -1,15 +1,15 @@
 #include "shiftOr.h"
 #include <iostream>
-#include <sstream>
+// #include <sstream>
 #include <string>
 #define T 64
 
 shiftOr::shiftOr(string path, string pat) : Algorithm (path) {
     this->setPat(pat);
-    // this->setFile(path);
 }
 
-void shiftOr::execute(string txt, bool debug=false) {
+deque<int> shiftOr::execute(string txt) {
+    /** Dada uma string, diz em que local dela o pat se encontra */
     bitset <T> S;
     S.set();
     deque <int> occ;
@@ -27,7 +27,8 @@ void shiftOr::execute(string txt, bool debug=false) {
     // if (debug) {
     //     printDebug(d, pat, txt);
     // }
-    this->r = occ;
+    // std::cout << txt << " " << occ.size() << std::endl;
+    return occ;
 }
 
 map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
@@ -71,19 +72,30 @@ map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
 // }
 
 int shiftOr::count(){
-    return r.size();
+    /** Retorna a qtde total de ocorrencias de pat no arquivo*/
+    this->reloadFile();
+    int n = 0;
+    string line;
+    while (this->getLine(line)) {
+        n += this->execute(line).size();
+    }
+    return n;
 }
 
 deque<int> shiftOr::occ() { 
-    /** Retorna todas as linhas que ocorreram */
+    /** Retorna todas as linhas do arquivo que ocorreram o pat */
+    this->reloadFile();
     deque<int> n;
     int i=0;
-    while (this->getLine() != NULL) {
-        
-        n.push_back(i);
+    string line;
+    while (this->getLine(line)) {
+        if (this->execute(line).size() > 0) { //ha ao menos 1 caso nessa linha
+            std::cout << line << std::endl;
+            n.push_back(i);
+        }
         i++;
     }
-    return this->r;
+    return n;
 }
 
 // void shiftOr::debug(){
@@ -95,8 +107,14 @@ deque<int> shiftOr::occ() {
 // }
 
 void shiftOr::setPat(string pat){
-    string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    this->masks = charMask(pat, ab);
+    char ab[128];
+    for (char i='\0'; i != 127; i++) {
+        ab[i] = i;
+    }
+    string abc(ab, 128);
+    // string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    this->masks = charMask(pat, abc);
+    this->pat = pat;
 }
 
 

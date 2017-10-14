@@ -1,20 +1,28 @@
+#include "Algorithm.h"
 
 Algorithm::Algorithm(string path) {
-    file.open(path);
+    // file.open(path);
+    this->path = path;
 }
 
-string Algorithm::getLine() {
+bool Algorithm::getLine(string& line) {
 /** Retorna a próxima linha do arquivo, se não existir o retorno é NULL */
-    string r;
+/** Retorna se ainda consegue ler e se sim, coloca a proxima linha na var do parametro */ 
     if (!file.eof()) {
-        file >> r;
+        std::getline(file, line);
+        return true;
     } else {
-        r = NULL;
+        return false;
     }
-    return r;
+}
+
+void Algorithm::reloadFile() {
+    /** Usada qd jah leu todas linhas do arquivo e precisa ler dnv */
+    this->setFile(this->path);
 }
 
 void Algorithm::setFile(string path) {
+    /** Seta um novo caminho de arquivo e fecha um anterior se existir */
     if (file && file.is_open()) {
         file.close();
     }
