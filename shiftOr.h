@@ -12,7 +12,9 @@
 using namespace std;
 class shiftOr : public Algorithm{
 private:
-    deque<int> r;
+    string txt;
+    string pat;
+    map<char, bitset<T>> masks;
 public:
     shiftOr(string, string, string, bool);
     // ~shiftOr();

@@ -4,13 +4,18 @@
 #ifndef ALGORITHM 
 #define ALGORITHM
 
-class Algorithm 
-{
+using namespace std;
+
+class Algorithm {
+private:
+    ifstream file;
 public:
+    Algorithm(string path);
     virtual int count() = 0; //imprime a qtde total de ocorrencias
     virtual std::deque<int> occ() = 0; //lista as linhas das ocorrencias
-    virtual void setPat(std::string pat) = 0;
-    virtual void setText(std::string text) = 0;
+    virtual void setPat(string pat) = 0;
+    void setFile(string path) = 0;
+    string getLine();
 };
 
 #endif

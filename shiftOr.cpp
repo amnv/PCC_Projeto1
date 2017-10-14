@@ -4,29 +4,33 @@
 #include <string>
 #define T 64
 
-shiftOr::shiftOr(string txt, string pat, string ab, bool debug = false) {
-    map<char, bitset<T>> masks = charMask(pat, ab);
+shiftOr::shiftOr(string path, string pat) : Algorithm (path) {
+    this->setPat(pat);
+    // this->setFile(path);
+}
+
+void shiftOr::execute(string txt, bool debug=false) {
     bitset <T> S;
     S.set();
     deque <int> occ;
-    deque <bitset<T>> d;
+    // deque <bitset<T>> d;
     for (int i=0; i<txt.size(); i++){
         char e = txt[i];
         S = S << 1 | masks[e];
         if (S[pat.size()-1] == 0){
             occ.push_back(i-pat.size()+1);
         }
-        if (debug == true) {
-            d.push_back(S);
-        }
+        // if (debug == true) {
+        //     d.push_back(S);
+        // }
     }
-    if (debug) {
-        printDebug(d, pat, txt);
-    }
+    // if (debug) {
+    //     printDebug(d, pat, txt);
+    // }
     this->r = occ;
 }
 
- map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
+map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
     map <char, bitset<T>> masks; //as mascaras para cada letra do alfabeto
     bitset<T> posmask = bitset<T>().set();
     posmask.reset(0); //comecando com 111...0
@@ -44,54 +48,57 @@ shiftOr::shiftOr(string txt, string pat, string ab, bool debug = false) {
     return masks;
 }
 
- void shiftOr::printDebug(deque<bitset<T>> deck, string pat, string txt){
-    cout << "  " << txt << endl;
-    for (int j=0; j<pat.size();j++){
-        cout << pat[j] << ' ';
-        for (int i=0; i<deck.size(); i++){
-            cout << deck[i][j];
-        }
-        cout << endl;
-    }
-}
+// void shiftOr::printDebug(deque<bitset<T>> deck, string pat, string txt){
+//     cout << "  " << txt << endl;
+//     for (int j=0; j<pat.size();j++){
+//         cout << pat[j] << ' ';
+//         for (int i=0; i<deck.size(); i++){
+//             cout << deck[i][j];
+//         }
+//         cout << endl;
+//     }
+// }
 
-
-template <class P>
-string shiftOr::fprint(deque<P> a){
-    string r = "";
-    for(int i=0; i<a.size(); i++){
-        ostringstream oss;
-        oss << a[i];
-        r = r + oss.str() + " ";
-    }
-    return r;
-}
+// template <class P>
+// string shiftOr::fprint(deque<P> a){
+//     string r = "";
+//     for(int i=0; i<a.size(); i++){
+//         ostringstream oss;
+//         oss << a[i];
+//         r = r + oss.str() + " ";
+//     }
+//     return r;
+// }
 
 int shiftOr::count(){
-    return 0;
+    return r.size();
 }
 
 deque<int> shiftOr::occ() { 
+    /** Retorna todas as linhas que ocorreram */
+    deque<int> n;
+    int i=0;
+    while (this->getLine() != NULL) {
+        
+        n.push_back(i);
+        i++;
+    }
     return this->r;
 }
 
-void shiftOr::debug(){
-    string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    shiftOr* alg = new shiftOr("babracadabrac", "abra", abc);
-    string s = fprint(alg->occ());
-    std::cout << "\n" << s << std::endl;
+// void shiftOr::debug(){
+//     shiftOr* alg = new shiftOr("babracadabrac", "abra", abc);
+//     string s = fprint(alg->occ());
+//     std::cout << "\n" << s << std::endl;
 
-    delete alg;
-}
+//     delete alg;
+// }
 
 void shiftOr::setPat(string pat){
-    
+    string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    this->masks = charMask(pat, ab);
 }
 
-
-void shiftOr::setText(string text) {
-
-}
 
 /*
 https://github.com/paguso/if76720172/commit/dd87fb4813623a1d1b415e115928cfe42a43afa9
