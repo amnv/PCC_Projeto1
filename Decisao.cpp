@@ -66,7 +66,7 @@ void Decisao::escolheAlg()
         else
         {
             //usa um dos algoritmos  exatos    
-            if (pat.size() > 1)
+            if (pat.size() > 1 || pat[0].size() > sizeof(long long)*8) //ou o tamanho do padrao nao cabe no long long
             {
                 this->algorithm = new ahoCorasick(this->files.front(), this->pat);
             }

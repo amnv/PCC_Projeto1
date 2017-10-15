@@ -13,7 +13,6 @@ private:
     ifstream file;
     string path;
 public:
-    Algorithm();
     Algorithm(string path);
     ~Algorithm();
     void setFile(string path);
