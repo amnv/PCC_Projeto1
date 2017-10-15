@@ -1,6 +1,7 @@
 #include "Algorithm.h"
 
 Algorithm::Algorithm(string path) {
+    std::cout << "Dentro de algoritmo" << std::endl;
     // file.open(path);
     this->path = path;
 }

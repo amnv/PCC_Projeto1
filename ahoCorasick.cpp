@@ -188,20 +188,63 @@ void ahoCorasick::debug()
 
 int ahoCorasick::count()
 {
+    int state = 0, newState = 0;
+    int count = 0;
 
+    this->reloadFile();
+    string texto;
+    while(this->getLine(texto))
+    {
+        for (int i = 0; i < text.size(); i++)
+        {
+            while((newState = g(state, text[i])) == FAIL) state = failer[state];
+
+            if (!output[newState].size())
+            {
+                cout << newState << " " ;
+                for (int j = 0; j < output[newState].size(); ++j)
+                {
+                    count++;
+                }
+                
+            }
+        }
+    }
+    return count;
 }
 
 deque<string> ahoCorasick::occ()
 {
+    this->reloadFile();
+    int state = 0, newState = 0;
+    deque<string> ret;
+    string texto;
+    while(this->getLine(texto))
+    {
+        for (int i = 0; i < texto.size(); i++)
+        {
+            while((newState = g(state, texto[i])) == FAIL) state = failer[state];
 
+            if (!output[newState].size())
+            {
+                cout << newState << " " ;
+                for (int j = 0; j < output[newState].size(); ++j)
+                {
+                    ret.push_back(texto);
+                }
+                
+            }
+        }
+    }
+    return ret;
 }
 
 void ahoCorasick::setPat(std::string pat)
 {
-
+    //nao definido pois passa um vetor de string
 }
 
 void ahoCorasick::setText(std::string text)
 {
-    
+    this->text = text;
 }

@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         {0, 0, 0, 0}
     };
 
-   while((optc = getopt_long(argc, argv, "e:p:a:c:", optionArray, NULL)) != -1)
+   while((optc = getopt_long(argc, argv, "e:p:a:ch", optionArray, NULL)) != -1)
    {
         switch (optc)
         {
@@ -95,14 +95,16 @@ int main(int argc, char **argv)
 
    if (help)
    {
-       cout << "Os seguintes parametros podem ser utilizados: \n\
+       cout << 
+       "Para rodar o programa utilize os ./a.out pattern file_name\
+       mais os seguintes parametros opcionais:\n\
        -e --edit Emax\n\
        -p --pattern patternfile\n\
        -a --algorithm algorithm_name\n\
        -c --count\n\
        -h --help!\n\
-       lista de algoritmos implementados..\
-       ";
+       lista de algoritmos implementados:\n\
+       Ahocorasick, Seller, ShiftOr, WuManber\n";
 
        //Encerra execucao do programa
        return 1;

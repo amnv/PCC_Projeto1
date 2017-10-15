@@ -43,6 +43,7 @@ void Decisao::escolheAlg()
     //testa se foi declarado explicatamente algum algoritmo
     if (this->algorithm_name.size() > 0)
     {
+        cout << "passando na parte de algName" << endl;
         this->nameToALgo();
         this->executa();
     }
@@ -50,6 +51,7 @@ void Decisao::escolheAlg()
     {
         if (editDistance >= 0)
         {
+            cout << "passando no edit distance" << endl;
             //usa um dos algoritmos NAO exatos    
             if (pat[0].size() > 64)
             {
@@ -62,6 +64,7 @@ void Decisao::escolheAlg()
         } 
         else
         {
+            cout << "passando para ver algoritmos exatos" << endl;
             //usa um dos algoritmos  exatos    
             if (pat.size() > 1)
             {
@@ -69,6 +72,7 @@ void Decisao::escolheAlg()
             }
             else 
             {
+                cout << "passou no shiftor" << endl;
                 this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
             }
         }
@@ -114,6 +118,7 @@ void Decisao::executa()
     }
     else
     {
+        cout << "antes de entrar em occ" << endl;
         deque<string> d = algorithm->occ();
         cout << "ocorrencias nas linhas" << endl;
         for(int i = 0; i < d.size(); i++)
