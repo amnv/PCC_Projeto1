@@ -124,12 +124,6 @@ int main(int argc, char **argv)
     
     if (files.empty()) cout << "Erro! Falta dados" << endl;
     
-    while(!files.empty())
-    {
-        cout << files.front() << endl;
-        files.pop();
-    } 
-
     //adicionar classe decisao que fara isso
     Decisao decisao(editDistance, pattern, patternfileName, algorithm_name, files, count);
     decisao.executa();

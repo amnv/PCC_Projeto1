@@ -25,9 +25,11 @@ Decisao::~Decisao()
 
 void Decisao::escolhePadrao()
 {
-    if (pattern.empty())
+    if (this->patternfileName.empty()) //nao passou um arquivo para pegar padroes
     {
         this->pat.push_back(this->pattern);
+    } else {
+        //tratar
     }
 }
 
@@ -45,13 +47,12 @@ void Decisao::escolheAlg()
     {
         cout << "passando na parte de algName" << endl;
         this->nameToALgo();
-        this->executa();
+        return;
     }
     else 
     {
         if (editDistance >= 0)
         {
-            cout << "passando no edit distance" << endl;
             //usa um dos algoritmos NAO exatos    
             if (pat[0].size() > 64)
             {
@@ -64,7 +65,6 @@ void Decisao::escolheAlg()
         } 
         else
         {
-            cout << "passando para ver algoritmos exatos" << endl;
             //usa um dos algoritmos  exatos    
             if (pat.size() > 1)
             {
@@ -72,7 +72,6 @@ void Decisao::escolheAlg()
             }
             else 
             {
-                cout << "passou no shiftor" << endl;
                 this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
             }
         }
