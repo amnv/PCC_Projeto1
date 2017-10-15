@@ -14,8 +14,8 @@ public:
     ~WuManber();
     int count(); //imprime a qtde total de ocorrencias
     void occ(); //lista as linhas das ocorrencias
-    void setPat(std::string pat);
-    std::deque<int> execute(string txt);
+    void setPat(string pat);
+    deque<int> execute(string txt, bool qtde);
     string getPat();
     map<char, bitset<T>> getMasks();
 };
