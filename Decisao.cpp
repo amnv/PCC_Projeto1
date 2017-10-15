@@ -117,14 +117,12 @@ void Decisao::executa()
     }
     else
     {
-        cout << "antes de entrar em occ" << endl;
-        deque<string> d = algorithm->occ();
-        cout << "ocorrencias nas linhas" << endl;
-        for(int i = 0; i < d.size(); i++)
-        {
-            cout << "linha: " << d[i] << " ";
-        }
-        cout << endl;
+        algorithm->occ();
+        // for(int i = 0; i < d.size(); i++)
+        // {
+        //     cout << d[i] << endl;
+        // }
+        // cout << endl;
     }
 }
 

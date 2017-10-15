@@ -31,7 +31,7 @@ class ahoCorasick : public Algorithm
         void debug();
         map<string, int> execute();
         int count(); //imprime a qtde total de ocorrencias
-        deque<string> occ(); //lista as linhas das ocorrencias
+        void occ(); //lista as linhas das ocorrencias
         void setPat(std::string pat);
         void setText(std::string text);
 };

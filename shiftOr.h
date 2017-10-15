@@ -19,12 +19,12 @@ public:
     // ~shiftOr();
     int count();
     static map<char, bitset<T>> charMask(string, string);
-    deque<int> execute(string txt);
+    deque<int> execute(string txt, bool qtde);
     // static void printDebug(deque<bitset<T>>, string, string);
     // template <class P>
     // static string fprint(deque<P> a);
     // void debug();
-    deque<string> occ();
+    void occ();
     void setPat(string);
     deque<int> dist();
     string getPat();

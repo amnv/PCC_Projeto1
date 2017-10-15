@@ -213,11 +213,11 @@ int ahoCorasick::count()
     return count;
 }
 
-deque<string> ahoCorasick::occ()
+void ahoCorasick::occ()
 {
     this->reloadFile();
     int state = 0, newState = 0;
-    deque<string> ret;
+    // deque<string> ret;
     string texto;
     while(this->getLine(texto))
     {
@@ -230,13 +230,13 @@ deque<string> ahoCorasick::occ()
                 cout << newState << " " ;
                 for (int j = 0; j < output[newState].size(); ++j)
                 {
-                    ret.push_back(texto);
+                    cout << (texto) << endl;
                 }
                 
             }
         }
     }
-    return ret;
+    // return ret;
 }
 
 void ahoCorasick::setPat(std::string pat)

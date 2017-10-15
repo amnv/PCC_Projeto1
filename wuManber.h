@@ -13,7 +13,7 @@ public:
     WuManber(string path, string pattern, int err);
     ~WuManber();
     int count(); //imprime a qtde total de ocorrencias
-    std::deque<string> occ(); //lista as linhas das ocorrencias
+    void occ(); //lista as linhas das ocorrencias
     void setPat(std::string pat);
     std::deque<int> execute(string txt);
     string getPat();

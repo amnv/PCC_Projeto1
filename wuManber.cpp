@@ -10,17 +10,16 @@ int WuManber::count() { //imprime a qtde total de ocorrencias
     return 0;
 }
 
-std::deque<string> WuManber::occ() {
+void WuManber::occ() {
     /** Retorna todas as linhas do arquivo que ocorreram o pat */
     this->reloadFile();
     deque<string> n;
     string line;
     while (this->getLine(line)) {
         if (this->execute(line).size() > 0) { //ha ao menos 1 caso nessa linha
-            n.push_back(line);
+            std::cout << (line) << std::endl;
         }
     }
-    return n;
 }
 
 void WuManber::setPat(std::string pat) {

@@ -5,12 +5,10 @@
 #define T 64
 
 shiftOr::shiftOr(string path, string pat) : Algorithm (path) {
-    cout << "dentro do shiftor" << endl;
     this->setPat(pat);
-    cout << "2 dentro do shiftor" << endl;
 }
 
-deque<int> shiftOr::execute(string txt) {
+deque<int> shiftOr::execute(string txt, bool qt=false) {
     /** Dada uma string, diz em que local dela o pat se encontra */
     bitset <T> S;
     S.set();
@@ -21,6 +19,9 @@ deque<int> shiftOr::execute(string txt) {
         S = S << 1 | masks[e];
         if (S[pat.size()-1] == 0){
             occ.push_back(i-pat.size()+1);
+            if (!qt) { //nao quer a qtde
+                break;
+            }
         }
         // if (debug == true) {
         //     d.push_back(S);
@@ -79,22 +80,22 @@ int shiftOr::count(){
     int n = 0;
     string line;
     while (this->getLine(line)) {
-        n += this->execute(line).size();
+        n += this->execute(line, true).size();
     }
     return n;
 }
 
-deque<string> shiftOr::occ() { 
+void shiftOr::occ() {
     /** Retorna todas as linhas do arquivo que ocorreram o pat */
     this->reloadFile();
-    deque<string> n;
     string line;
+    // cout << "reloadBefore\n";
     while (this->getLine(line)) {
+        // cout << "line";
         if (this->execute(line).size() > 0) { //ha ao menos 1 caso nessa linha
-            n.push_back(line);
+            cout << (line) << endl;
         }
     }
-    return n;
 }
 
 string shiftOr::getPat() {

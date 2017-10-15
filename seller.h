@@ -23,7 +23,7 @@ public:
     vector<int> newColumn(vector<int>col, int i);
     void debbug();
     int count(); //imprime a qtde total de ocorrencias
-    deque<string> occ(); //lista as linhas das ocorrencias
+    void occ(); //lista as linhas das ocorrencias
     void setPat(string pat);
     void setText(string text);
 };

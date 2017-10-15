@@ -75,7 +75,7 @@ int seller::count()
     return this->execute().size();
 }
 
-deque<string> seller::occ() 
+void seller::occ() 
 {
 
 }
