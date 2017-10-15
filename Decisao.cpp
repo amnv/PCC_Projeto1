@@ -45,7 +45,6 @@ void Decisao::escolheAlg()
     //testa se foi declarado explicatamente algum algoritmo
     if (this->algorithm_name.size() > 0)
     {
-        cout << "passando na parte de algName" << endl;
         this->nameToALgo();
         return;
     }
@@ -91,17 +90,19 @@ void Decisao::nameToALgo()
     {
         this->algorithm = new seller(this->files.front(), this->pat[0], this->editDistance);
     }
-    else if (this->algorithm_name == "WuManber")
+    else if (this->algorithm_name == "wumanber")
     {
         this->algorithm = new WuManber(this->files.front(), this->pat[0], this->editDistance);
     }
-    else if (this->algorithm_name == "shiftOr")
+    else if (this->algorithm_name == "shiftor")
     {
         this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
     }
     else 
     {
-        //erro
+        cout << "Algoritmo nao encontrado, usando default." << endl;
+        this->algorithm_name = "";
+        this->escolheAlg();
     }
 }
 
@@ -113,7 +114,7 @@ void Decisao::executa()
     //escolhe qual funcao executar
     if (this->count)
     {
-        cout << "Quantidade total de ocorrencias " << algorithm->count() << endl;
+        cout << algorithm->count() << endl;
     }
     else
     {

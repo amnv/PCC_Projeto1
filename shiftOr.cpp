@@ -17,6 +17,9 @@ deque<int> shiftOr::execute(string txt, bool qt=false) {
     long long S = ~0;
 
     deque <int> occ;
+    if (pat.size() > sizeof(long long)*8) {
+        return occ;
+    }
     // deque <bitset<T>> d;
     for (int i=0; i<txt.size(); i++){
         unsigned char e = txt[i];

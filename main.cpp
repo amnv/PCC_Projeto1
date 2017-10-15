@@ -111,15 +111,15 @@ int main(int argc, char **argv)
    if (help)
    {
        cout << 
-       "Para rodar o programa utilize os ./a.out pattern file_name\
-       mais os seguintes parametros opcionais:\n\
+       "USO: " << argv[0] << " [OPCOES] PADRAO ARQUIVO\n\
+       OPCOES:\n\
        -e --edit Emax\n\
        -p --pattern patternfile\n\
-       -a --algorithm algorithm_name\n\
+       -a --algorithm [ahocorasick, seller, shiftor or wumanber]\n\
        -c --count\n\
        -h --help!\n\
-       lista de algoritmos implementados:\n\
-       Ahocorasick, Seller, ShiftOr, WuManber\n";
+       Algoritmos usados:\n\
+       ahocorasick, seller, shiftor, wumanber\n";
 
        //Encerra execucao do programa
        return 1;
