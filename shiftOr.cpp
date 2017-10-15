@@ -5,7 +5,9 @@
 #define T 64
 
 shiftOr::shiftOr(string path, string pat) : Algorithm (path) {
+    cout << "dentro do shiftor" << endl;
     this->setPat(pat);
+    cout << "2 dentro do shiftor" << endl;
 }
 
 deque<int> shiftOr::execute(string txt) {

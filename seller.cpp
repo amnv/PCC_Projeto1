@@ -34,15 +34,19 @@ vector<int> seller::execute()
     vector<int> col(tamPattern + 1);
     vector<int> occuranceList;
 
-    for (int i = 0; i < text.size(); ++i)
+    this->reloadFile();
+    string texto;
+    while(this->getLine(texto))
     {
-        col = newColumn(col, i);
-        if (col[tamPattern] <= err)
+        for (int i = 0; i < text.size(); ++i)
         {
-            occuranceList.push_back(i);
+            col = newColumn(col, i);
+            if (col[tamPattern] <= err)
+            {
+                occuranceList.push_back(i);
+            }
         }
     }
-
     return occuranceList;
 }
 
@@ -59,17 +63,19 @@ void seller::debbug()
 
 void seller::setPat(string pat)
 {
-
+    this->pattern = pat;
 }
 void seller::setText(string text)
 {
-
+    this->text = text;
 }
 
-int seller::count() {
-
+int seller::count() 
+{
+    return this->execute().size();
 }
 
-deque<string> seller::occ() {
+deque<string> seller::occ() 
+{
 
 }

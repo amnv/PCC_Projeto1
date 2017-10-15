@@ -16,12 +16,14 @@ public:
     Algorithm();
     Algorithm(string path);
     ~Algorithm();
-    virtual int count() = 0; //imprime a qtde total de ocorrencias
-    virtual deque<string> occ() = 0; //lista as linhas das ocorrencias
-    virtual void setPat(string pat) = 0;
     void setFile(string path);
     void reloadFile();
     bool getLine(string& line);
+
+    //metodos abstratos
+    virtual int count() = 0; //imprime a qtde total de ocorrencias
+    virtual deque<string> occ() = 0; //lista as linhas das ocorrencias
+    virtual void setPat(string pat) = 0;
 };
 
 #endif
