@@ -11,12 +11,12 @@ using namespace std;
 class shiftOr : public Algorithm{
 private:
     string pat;
-    map<char, long long> masks;
+    map<unsigned char, long long> masks;
 public:
     shiftOr(string path, string pat);
     // ~shiftOr();
     int count();
-    static map<char, long long> charMask(string, string);
+    static map<unsigned char, long long> charMask(string pat, unsigned char* ab, int sizeab);
     deque<int> execute(string txt, bool qtde);
     // static void printDebug(deque<bitset<T>>, string, string);
     // template <class P>
@@ -27,7 +27,7 @@ public:
     deque<int> dist();
     string getPat();
     int getBit(long long num, int indice);
-    map<char, long long> getMasks();
+    map<unsigned char, long long> getMasks();
 };
 
 #endif

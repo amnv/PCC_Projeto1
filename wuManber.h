@@ -17,7 +17,7 @@ public:
     void setPat(string pat);
     deque<int> execute(string txt, bool qtde);
     string getPat();
-    map<char, long long> getMasks();
+    map<unsigned char, long long> getMasks();
     int getBit(long long num, int i);
 };
 

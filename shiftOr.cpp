@@ -19,7 +19,7 @@ deque<int> shiftOr::execute(string txt, bool qt=false) {
     deque <int> occ;
     // deque <bitset<T>> d;
     for (int i=0; i<txt.size(); i++){
-        char e = txt[i];
+        unsigned char e = txt[i];
         S = S << 1 | masks[e];
         if (!getBit(S, pat.size()-1)){ // o bit mais significativo usado eh 0
             occ.push_back(i-pat.size()+1);
@@ -38,16 +38,16 @@ deque<int> shiftOr::execute(string txt, bool qt=false) {
     return occ;
 }
 
-map<char, long long> shiftOr::charMask(string pat, string ab){
-    map <char, long long> masks; //as mascaras para cada letra do alfabeto
+map<unsigned char, long long> shiftOr::charMask(string pat, unsigned char* ab, int sizeab){
+    map <unsigned char, long long> masks; //as mascaras para cada letra do alfabeto
     long long posmask = ~1; //comecando com 111...0
 
-    for (int i=0; i<ab.size();i++){ //criando mascara para cada elemento do alfabeto
-        char e = ab[i];
+    for (int i=0; i<sizeab;i++){ //criando mascara para cada elemento do alfabeto
+        unsigned char e = ab[i];
         masks[e] = ~0; //comecando com tudo 1
     }
     for (int i=0; i<pat.size(); i++){
-        char e = pat[i];
+        unsigned char e = pat[i];
         masks[e] &= posmask;
         posmask = posmask << 1 | 1;
     }
@@ -105,7 +105,7 @@ string shiftOr::getPat() {
     return this->pat;
 }
 
-map<char, long long> shiftOr::getMasks() {
+map<unsigned char, long long> shiftOr::getMasks() {
     /** Para classe filha acessar */
     return this->masks;
 }
@@ -119,13 +119,16 @@ map<char, long long> shiftOr::getMasks() {
 // }
 
 void shiftOr::setPat(string pat){
-    char ab[128];
-    for (char i='\0'; i != 127; i++) {
+    unsigned char ab[256];
+    unsigned char i=0;
+    do {
         ab[i] = i;
-    }
-    string abc(ab, 128);
+        i++;
+    } while (i>0 && i<=255);
+    // cout << sizeof(ab) / sizeof(ab[0]) << endl;
+    // string abc(ab);
     // string abc =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    this->masks = charMask(pat, abc);
+    this->masks = charMask(pat, ab, 256);
     this->pat = pat;
 }
 

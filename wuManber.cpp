@@ -6,7 +6,7 @@ WuManber::~WuManber() {}
 
 // bitset<T>
 std::deque<int> WuManber::execute(string txt, bool qtde=false) {
-    map<char, long long> masks = this->getMasks();
+    map<unsigned char, long long> masks = this->getMasks();
     string pat = this->getPat();
 
     long long all = ~0;
@@ -18,7 +18,7 @@ std::deque<int> WuManber::execute(string txt, bool qtde=false) {
 
     for (int j=0; j<txt.size(); j++) {
         long long S1 = S[0];
-        char e = txt[j];
+        unsigned char e = txt[j];
         S[0] = S[0] << 1 | masks[e];
         for (int k=1; k<=this->err; k++) {
             long long Sold = S[k];
@@ -65,7 +65,7 @@ string WuManber::getPat() {
     return shiftOr::getPat();
 }
 
-map<char, long long> WuManber::getMasks() {
+map<unsigned char, long long> WuManber::getMasks() {
     return shiftOr::getMasks();
 }
 
