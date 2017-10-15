@@ -2,8 +2,11 @@
 #include <getopt.h> // *GNU* Para o getopt_long()
 #include <string>
 #include <queue>
-
 #include "Decisao.h"
+
+// #include "Algorithm.h"
+// #include "ahoCorasick.h"
+// #include "shiftOr.h"
 
 #define NAO_SETADA -1
 
@@ -24,10 +27,29 @@ int charToInt(char* texto)
     return x;
 }
 
-
-
+//def1ne
+//def1n1
+//defin3
+//de
+//padr135
 int main(int argc, char **argv)
 {
+    // vector<string> pats;
+    // pats.push_back("padroes"); 
+    // Algorithm* a = new ahoCorasick("./main.cpp", pats);
+    // Algorithm* b = new shiftOr("./main.cpp", "padroes");
+    // cout << "vai comecar" << endl;
+    // deque<string> opa = a->occ();
+    // cout << "terminou ahocorasick" << endl;
+    // deque<string> opa2 = b->occ();
+    // cout << "terminou shiftOr" << endl;
+    
+    // for (int i=0; i<opa.size(); i++) {
+    //     cout << opa[i] << endl;
+    //     cout << opa2[i] << endl;
+        
+    // }
+    // return 0;
     /*fazer os seguinte padroes
         -e --edit Emax
         -p --pattern patternfile
