@@ -20,13 +20,6 @@ using namespace std;
     ./a.out
 */
 
-int charToInt(char* texto)
-{
-    int x;
-    //falta implementar
-    return x;
-}
-
 //def1ne
 //def1n1
 //defin3
@@ -94,23 +87,23 @@ int main(int argc, char **argv)
         switch (optc)
         {
             case 'e':
-                editDistance = charToInt(optarg);
+                editDistance = atoi(optarg);
                 //editDistance = optarg;
+                break;
             case 'p':
                 patternfileName = optarg;
-                cout << "pattern" << endl;
+                break;
             case 'a':
                 algorithm_name = optarg;
-                cout << "algorithm" << endl;
+                break;
             case 'c':
                 count = true;
-                cout << "count" << endl;
+                break;
             case 'h':
                 help = true;
-                cout << "help" << endl;
                 break;
             default:
-                cout << "codigo digitado errado" << endl;
+                cout << "Codigo digitado errado" << endl;
                 return 1;
         }
    }
