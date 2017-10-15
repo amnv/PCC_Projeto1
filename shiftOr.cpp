@@ -2,22 +2,26 @@
 #include <iostream>
 // #include <sstream>
 #include <string>
-#define T 64
 
 shiftOr::shiftOr(string path, string pat) : Algorithm (path) {
     this->setPat(pat);
 }
 
+int shiftOr::getBit(long long num, int i) {
+    /** retorna o bit de indice i do numero recebido*/
+      return num = num >> i & 1;
+}
+
 deque<int> shiftOr::execute(string txt, bool qt=false) {
     /** Dada uma string, diz em que local dela o pat se encontra */
-    bitset <T> S;
-    S.set();
+    long long S = ~0;
+
     deque <int> occ;
     // deque <bitset<T>> d;
     for (int i=0; i<txt.size(); i++){
         char e = txt[i];
         S = S << 1 | masks[e];
-        if (S[pat.size()-1] == 0){
+        if (!getBit(S, pat.size()-1)){ // o bit mais significativo usado eh 0
             occ.push_back(i-pat.size()+1);
             if (!qt) { //nao quer a qtde
                 break;
@@ -34,20 +38,18 @@ deque<int> shiftOr::execute(string txt, bool qt=false) {
     return occ;
 }
 
-map<char, bitset<T>> shiftOr::charMask(string pat, string ab){
-    map <char, bitset<T>> masks; //as mascaras para cada letra do alfabeto
-    bitset<T> posmask = bitset<T>().set();
-    posmask.reset(0); //comecando com 111...0
+map<char, long long> shiftOr::charMask(string pat, string ab){
+    map <char, long long> masks; //as mascaras para cada letra do alfabeto
+    long long posmask = ~1; //comecando com 111...0
 
-    for (int i=0; i<ab.size();i++){ //colocando bitset para cada elemento do alfabeto
+    for (int i=0; i<ab.size();i++){ //criando mascara para cada elemento do alfabeto
         char e = ab[i];
-        masks[e] = bitset<T>().set(); //comecando com 1
+        masks[e] = ~0; //comecando com tudo 1
     }
-    for (int i=0; i<pat.size(); i++){ 
+    for (int i=0; i<pat.size(); i++){
         char e = pat[i];
         masks[e] &= posmask;
-        posmask = posmask << 1;
-        posmask[0] = 1; //ou 1
+        posmask = posmask << 1 | 1;
     }
     return masks;
 }
@@ -103,7 +105,7 @@ string shiftOr::getPat() {
     return this->pat;
 }
 
-map<char, bitset<T>> shiftOr::getMasks() {
+map<char, long long> shiftOr::getMasks() {
     /** Para classe filha acessar */
     return this->masks;
 }
