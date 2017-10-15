@@ -7,13 +7,14 @@
 
 
 class WuManber : public shiftOr {
+private:
+    int err;
 public:
     WuManber(string path, string pattern, int err);
     ~WuManber();
     int count(); //imprime a qtde total de ocorrencias
     std::deque<string> occ(); //lista as linhas das ocorrencias
     void setPat(std::string pat);
-    void setText(std::string text);
     std::deque<int> execute(string txt);
     string getPat();
     map<char, bitset<T>> getMasks();
