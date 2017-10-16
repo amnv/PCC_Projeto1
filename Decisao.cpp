@@ -29,6 +29,13 @@ void Decisao::escolhePadrao()
     {
         this->pat.push_back(this->pattern);
     } else {
+        ifstream file(this->patternfileName);
+        while (!file.eof()) {
+            string line;
+            std::getline(file, line);
+            this->pat.push_back(line);
+        }
+
         //tratar
     }
 }

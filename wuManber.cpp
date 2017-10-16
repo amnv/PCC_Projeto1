@@ -14,7 +14,7 @@ std::deque<int> WuManber::execute(string txt, bool qtde=false) {
     deque<long long> S;
     S[0] = all;
     for (int i=1; i<=this->err; i++)
-        S[i] = S[i-1] >> 1;
+        S[i] = S[i-1] << 1;
 
     for (int j=0; j<txt.size(); j++) {
         long long S1 = S[0];
