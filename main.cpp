@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     int optc = 0;
     int editDistance = NAO_SETADA;
     string pattern;
-    string patternfileName;
+    string patternfileName = "";
     string algorithm_name;
     queue<string> files;
     bool count = false;
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
    if (help)
    {
        cout << 
-       "USO: " << argv[0] << " [OPCOES] PADRAO ARQUIVO\n\
+       "USO: " << argv[0] << " [OPCOES] {PADRAO|-p FILE} ARQUIVO\n\
        OPCOES:\n\
        -e --edit Emax\n\
        -p --pattern patternfile\n\
@@ -132,9 +132,9 @@ int main(int argc, char **argv)
        cout << "Erro! Falta dados" << endl;
        return 1;
     }
-    
-    pattern = argv[optind++];
-    
+    if (patternfileName.empty()) { //nao setou nenhum arquivo para o padrao
+        pattern = argv[optind++];
+    }
     while(optind < argc) files.push(argv[optind++]);
     
     if (files.empty()) cout << "Erro! Falta dados" << endl;
