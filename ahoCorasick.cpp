@@ -216,16 +216,16 @@ void ahoCorasick::occ()
 {
     this->reloadFile();
     int state = 0, newState = 0;
-    // deque<string> ret;
+     deque<string> ret;
     string texto;
     cout << texto << endl;
     while(this->getLine(texto))
     {
         for (int i = 0; i < texto.size(); i++)
         {
-            while((newState = g(state, texto[i])) == FAIL) state = failer[state];
+            while((newState = g(texto[i], state)) == FAIL) state = failer[state];
 
-            if (!output[newState].size())
+            if (output[newState].size()>0)
             {
                 cout << newState << " " ;
                 for (int j = 0; j < output[newState].size(); ++j)
