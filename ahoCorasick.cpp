@@ -59,7 +59,8 @@ void ahoCorasick::buildGotoState()
         {
             newState++;
             gotoState[state].push_back(make_pair(pat[i], newState));
-            gotoState.push_back(vector<pair<char, int> >());
+            vector<pair<char, int> > v;
+            gotoState.push_back(v);
             i++;
         }
         
@@ -79,8 +80,10 @@ void ahoCorasick::buildGotoState()
 void ahoCorasick::buildFail()
 {
     queue<pair<char, int> > states;
-    failer.resize(gotoState.size(), FAIL);
+    failer.resize(gotoState.size() + 1, FAIL);
 
+    cout << "ate aqui foi" << endl;
+    cout << gotoState[0].size();
     vector<pair<char, int> > inicialState = gotoState[0];
     for (int i = 0; i < inicialState.size(); i++)
     {
@@ -88,6 +91,7 @@ void ahoCorasick::buildFail()
         failer[inicialState[i].second] = 0;
     }
 
+    cout << "todos os estados do primeito nivel setados" << endl;
     while(!states.empty())
     {
         pair<char, int> r = states.front();
@@ -100,9 +104,14 @@ void ahoCorasick::buildFail()
         {
             states.push(aux[i]);
             int state = failer[r.second];
-            while((failState = g(aux[i].first, state)) == FAIL) state = failer[state];
+            while((failState = g(aux[i].first, state)) == FAIL) 
+            {
+                state = failer[state];
+                cout << "state " << state << endl;
+                cout << "failState " << failState << endl;
+            }
             failer[aux[i].second] = failState;        
-
+            cout << "sai com failstate " << failState << endl;
             //adding output 
             outputFromFail(aux[i].second, failState);        
         }
@@ -152,8 +161,7 @@ void ahoCorasick::debug()
     a.push_back("his");
     a.push_back("hers");
 
-    buildGotoState();
-    buildFail();
+    cout << "passei";
 
     //print g function
     for (int i = 0; i < gotoState.size(); ++i)
@@ -169,11 +177,11 @@ void ahoCorasick::debug()
     //print output function
     for (map<int, vector<string> >::iterator it = output.begin(); it != output.end(); ++it)
     {
-    cout << "estado " << it->first << " palavras " << endl;
+        cout << "estado " << it->first << " palavras " << endl;
         for (int j = 0; j < it->second.size(); ++j)
-    {
-        cout << it->second[j] << " ";
-    }
+        {
+            cout << it->second[j] << " ";
+        }
         cout << endl;
     }
     
@@ -248,3 +256,4 @@ void ahoCorasick::setText(std::string text)
 {
     this->text = text;
 }
+
