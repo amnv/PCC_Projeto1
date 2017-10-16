@@ -79,5 +79,24 @@ int seller::count()
 
 void seller::occ() 
 {
+    int tamPattern = pattern.size();
+    vector<int> col(tamPattern + 1);
+    vector<int> occuranceList;
 
+    this->reloadFile();
+    string texto;
+    while(this->getLine(texto))
+    {
+       // cout << texto << endl;
+        this->text = texto;
+        for (int i = 0; i < texto.size(); ++i)
+        {
+            col = newColumn(col, i);
+            if (col[tamPattern] <= err)
+            {
+                cout << texto << endl;
+                break;
+            }
+        }
+    }   
 }
