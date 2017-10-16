@@ -128,7 +128,7 @@ map<string, int> ahoCorasick::execute()
     map<string, int> v;
     for (int i = 0; i < text.size(); i++)
     {
-        while((newState = g(state, text[i])) == FAIL) state = failer[state];
+        while((newState = g(text[i], state)) == FAIL) state = failer[state];
 
         if (!output[newState].size())
         {
@@ -198,15 +198,18 @@ int ahoCorasick::count()
     while(this->getLine(texto))
     {
         cout << texto << endl;
+        this->text = texto;
+        
         for (int i = 0; i < texto.size(); i++)
         {
-            while((newState = g(texto[i], state) == FAIL)) state = failer[state];
+            while((newState = g(texto[i], state)) == FAIL) state = failer[state];
 
             if (output[newState].size() > 0)
             {
                 cout << newState << " ";
                 count += output[newState].size();                
             }
+            state = newState;
         }
     }
     return count;
@@ -218,22 +221,20 @@ void ahoCorasick::occ()
     int state = 0, newState = 0;
      deque<string> ret;
     string texto;
-    cout << texto << endl;
     while(this->getLine(texto))
     {
+        cout << texto << endl;
+        this->text = texto;
         for (int i = 0; i < texto.size(); i++)
         {
             while((newState = g(texto[i], state)) == FAIL) state = failer[state];
 
-            if (output[newState].size()>0)
+            if (output[newState].size() > 0)
             {
-                cout << newState << " " ;
-                for (int j = 0; j < output[newState].size(); ++j)
-                {
-                    cout << (texto) << endl;
-                }
-                
+                cout << texto << endl;
+                break;
             }
+            state = newState;
         }
     }
     // return ret;
