@@ -82,8 +82,6 @@ void ahoCorasick::buildFail()
     queue<pair<char, int> > states;
     failer.resize(gotoState.size() + 1, FAIL);
 
-    cout << "ate aqui foi" << endl;
-    cout << gotoState[0].size();
     vector<pair<char, int> > inicialState = gotoState[0];
     for (int i = 0; i < inicialState.size(); i++)
     {
@@ -91,7 +89,6 @@ void ahoCorasick::buildFail()
         failer[inicialState[i].second] = 0;
     }
 
-    cout << "todos os estados do primeito nivel setados" << endl;
     while(!states.empty())
     {
         pair<char, int> r = states.front();
@@ -107,11 +104,9 @@ void ahoCorasick::buildFail()
             while((failState = g(aux[i].first, state)) == FAIL) 
             {
                 state = failer[state];
-                cout << "state " << state << endl;
-                cout << "failState " << failState << endl;
             }
             failer[aux[i].second] = failState;        
-            cout << "sai com failstate " << failState << endl;
+
             //adding output 
             outputFromFail(aux[i].second, failState);        
         }
@@ -125,7 +120,6 @@ void ahoCorasick::outputFromFail(int r, int failState)
         for (int i = 0; i < output[failState].size(); i++)
             output[r].push_back(output[failState][i]);
     }
- //   cout << "asd" << endl;
 }
 
 map<string, int> ahoCorasick::execute()
@@ -203,18 +197,15 @@ int ahoCorasick::count()
     string texto;
     while(this->getLine(texto))
     {
-        for (int i = 0; i < text.size(); i++)
+        cout << texto << endl;
+        for (int i = 0; i < texto.size(); i++)
         {
-            while((newState = g(state, text[i])) == FAIL) state = failer[state];
+            while((newState = g(texto[i], state) == FAIL)) state = failer[state];
 
-            if (!output[newState].size())
+            if (output[newState].size() > 0)
             {
-                cout << newState << " " ;
-                for (int j = 0; j < output[newState].size(); ++j)
-                {
-                    count++;
-                }
-                
+                cout << newState << " ";
+                count += output[newState].size();                
             }
         }
     }
@@ -227,6 +218,7 @@ void ahoCorasick::occ()
     int state = 0, newState = 0;
     // deque<string> ret;
     string texto;
+    cout << texto << endl;
     while(this->getLine(texto))
     {
         for (int i = 0; i < texto.size(); i++)
