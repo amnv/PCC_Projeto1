@@ -28,9 +28,12 @@ void Decisao::escolhePadrao()
     if (this->patternfileName.empty()) //nao passou um arquivo para pegar padroes
     {
         this->pat.push_back(this->pattern);
-    } else {
+    }
+    else
+    {
         ifstream file(this->patternfileName);
-        while (!file.eof()) {
+        while (!file.eof())
+        {
             string line;
             std::getline(file, line);
             this->pat.push_back(line);
@@ -55,11 +58,11 @@ void Decisao::escolheAlg()
         this->nameToALgo();
         return;
     }
-    else 
+    else
     {
         if (editDistance >= 0)
         {
-            //usa um dos algoritmos NAO exatos    
+            //usa um dos algoritmos NAO exatos
             if (pat[0].size() > 64)
             {
                 this->algorithm = new seller(this->files.front(), this->pat[0], this->editDistance);
@@ -68,23 +71,21 @@ void Decisao::escolheAlg()
             {
                 this->algorithm = new WuManber(this->files.front(), this->pat[0], this->editDistance);
             }
-        } 
+        }
         else
         {
-            //usa um dos algoritmos  exatos    
-            if (pat.size() > 1 || pat[0].size() > sizeof(long long)*8) //ou o tamanho do padrao nao cabe no long long
+            //usa um dos algoritmos  exatos
+            if (pat.size() > 1 || pat[0].size() > sizeof(long long) * 8) //ou o tamanho do padrao nao cabe no long long
             {
                 this->algorithm = new ahoCorasick(this->files.front(), this->pat);
             }
-            else 
+            else
             {
                 this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
             }
         }
         this->files.pop();
     }
-    
-
 }
 
 void Decisao::nameToALgo()
@@ -105,7 +106,7 @@ void Decisao::nameToALgo()
     {
         this->algorithm = new shiftOr(this->files.front(), this->pat[0]);
     }
-    else 
+    else
     {
         cout << "Algoritmo nao encontrado, usando default." << endl;
         this->algorithm_name = "";
@@ -133,5 +134,3 @@ void Decisao::executa()
         // cout << endl;
     }
 }
-
-

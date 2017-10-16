@@ -8,7 +8,7 @@
 // #include "ahoCorasick.h"
 // #include "shiftOr.h"
 
-#define NAO_SETADA -1
+#define NAO_SETADA 0
 
 using namespace std;
 
