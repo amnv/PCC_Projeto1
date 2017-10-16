@@ -38,7 +38,9 @@ vector<int> seller::execute()
     string texto;
     while(this->getLine(texto))
     {
-        for (int i = 0; i < text.size(); ++i)
+       // cout << texto << endl;
+        this->text = texto;
+        for (int i = 0; i < texto.size(); ++i)
         {
             col = newColumn(col, i);
             if (col[tamPattern] <= err)
