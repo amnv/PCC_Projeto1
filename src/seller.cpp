@@ -31,7 +31,7 @@ vector<int> seller::newColumn(vector<int> col, int j)
 vector<int> seller::execute()
 {
     int tamPattern = pattern.size();
-    vector<int> col(tamPattern + 1);
+    vector<int> col(tamPattern + 1, 0);
     vector<int> occuranceList;
 
     this->reloadFile();
@@ -80,7 +80,7 @@ int seller::count()
 void seller::occ() 
 {
     int tamPattern = pattern.size();
-    vector<int> col(tamPattern + 1);
+    vector<int> col(tamPattern + 1, 0);
     vector<int> occuranceList;
 
     this->reloadFile();

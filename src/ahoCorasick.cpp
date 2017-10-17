@@ -197,7 +197,7 @@ int ahoCorasick::count()
     string texto;
     while(this->getLine(texto))
     {
-        cout << texto << endl;
+        // cout << texto << endl;
         this->text = texto;
         
         for (int i = 0; i < texto.size(); i++)
@@ -206,7 +206,7 @@ int ahoCorasick::count()
 
             if (output[newState].size() > 0)
             {
-                cout << newState << " ";
+                // cout << newState << " ";
                 count += output[newState].size();                
             }
             state = newState;
@@ -223,7 +223,7 @@ void ahoCorasick::occ()
     string texto;
     while(this->getLine(texto))
     {
-        cout << texto << endl;
+        // cout << texto << endl;
         this->text = texto;
         for (int i = 0; i < texto.size(); i++)
         {
@@ -231,7 +231,7 @@ void ahoCorasick::occ()
 
             if (output[newState].size() > 0)
             {
-                cout << texto << endl;
+                // cout << texto << endl;
                 break;
             }
             state = newState;
